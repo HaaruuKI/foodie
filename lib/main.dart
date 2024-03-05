@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/colors/colors.dart';
-import 'package:foodie/routes/routes.dart';
+import 'package:foodie/ui/colors.dart';
+import 'package:foodie/ui/router.dart';
 
 void main() {
   runApp(const MyApp());
