@@ -6,11 +6,12 @@ import 'package:flutter/cupertino.dart';
 // import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:foodie/ui/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodie/ui/pages/explore_tab/widget/Popular_widget.dart';
 import 'package:foodie/ui/pages/explore_tab/widget/categories_widget.dart';
 import 'package:foodie/ui/pages/explore_tab/widget/more_widget.dart';
+import 'package:foodie/ui/widget/btn_cart.dart';
+import 'package:foodie/ui/widget/search.dart';
 
 class ExploreTab extends StatefulWidget {
   const ExploreTab({super.key});
@@ -28,50 +29,7 @@ class _ExploreTabState extends State<ExploreTab> {
           padding: const EdgeInsets.all(0.0),
           child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, 'search');
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 50,
-                    horizontal: 15,
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 2,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      child: Row(children: [
-                        Icon(
-                          CupertinoIcons.search,
-                          color: Color.fromARGB(255, 243, 164, 16),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: Text('Buscar...'),
-                          ),
-                        ),
-                      ]),
-                    ),
-                  ),
-                ),
-              ),
+              const Search(),
               CategoriasWidget(),
               const PopularesItemWidget(),
               const MoreWidget(),
@@ -80,17 +38,7 @@ class _ExploreTabState extends State<ExploreTab> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, 'cartPage');
-        },
-        backgroundColor: Colors.white,
-        child: const Icon(
-          CupertinoIcons.cart,
-          size: 28,
-          color: amarillo,
-        ),
-      ),
+      floatingActionButton: btn_cart(context),
     );
   }
 }

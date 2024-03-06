@@ -3,10 +3,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:foodie/ui/pages/profile/widget/profile_user_widget.dart';
+import 'package:foodie/ui/pages/profile/widget/profile_user_widget_guest.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileUser extends StatefulWidget {
-  const ProfileUser({super.key});
+  const ProfileUser({Key? key}) : super(key: key);
 
   @override
   State<ProfileUser> createState() => _ProfileUserState();
@@ -14,7 +16,7 @@ class ProfileUser extends StatefulWidget {
 
 class _ProfileUserState extends State<ProfileUser> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  // final GoogleSignIn _googleSignIn = GoogleSignIn();
   User? user;
   String userEmail = "";
   String userName = "";
@@ -63,51 +65,11 @@ class _ProfileUserState extends State<ProfileUser> {
       appBar: AppBar(
         title: const Text('Perfil'),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
           children: [
-            Column(
-              children: [
-                const SizedBox(height: 30),
-                if (user != null)
-                  Column(
-                    children: [
-                      Text(userName, style: const TextStyle(fontSize: 24)),
-                      Text(userEmail, style: const TextStyle(fontSize: 18)),
-                    ],
-                  ),
-                // TextButton(
-                //   onPressed: () {},
-                //   child: const Text(
-                //     'Configuraciones',
-                //     style: TextStyle(fontSize: 20, color: Colors.black),
-                //   ),
-                // ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'historial');
-                  },
-                  child: const Text(
-                    'Historial de ordenes',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    style: buttonTertiary,
-                    onPressed: () async {
-                      await _auth.signOut();
-                      await _googleSignIn.signOut();
-                      Navigator.pushNamed(context, 'menu');
-                    },
-                    child: const Text("Cerrar sesion"),
-                  ),
-                )
-              ],
-            ),
+            const SizedBox(height: 30),
+            if (user == null) ProfileUserGuest() else Profile()
           ],
         ),
       ),

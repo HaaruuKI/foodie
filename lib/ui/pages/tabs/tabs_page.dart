@@ -25,7 +25,7 @@ class _TabsPageState extends State<TabsPage> {
 
   final List<Widget> _widgetOptionsGuest = [
     ExploreTab(),
-    // Order(),
+    // Order(),r
     // Favorites(),
     ProfileUser(),
   ];
@@ -117,10 +117,6 @@ class _TabsPageState extends State<TabsPage> {
             icon: Icon(Icons.account_circle_outlined),
             label: 'Perfil',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.account_circle_outlined),
-          //   label: 'Pruebas',
-          // ),
         ]);
   }
 }
