@@ -13,10 +13,6 @@ class CategoriasWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
         child: Column(
           children: [
-            Text(
-              'Categorias',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
             Categories(),
           ],
         ),
