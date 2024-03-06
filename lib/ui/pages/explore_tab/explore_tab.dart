@@ -72,7 +72,7 @@ class _ExploreTabState extends State<ExploreTab> {
                   ),
                 ),
               ),
-              const CategoriasWidget(),
+              CategoriasWidget(),
               const PopularesItemWidget(),
               const MoreWidget(),
               const SizedBox(height: 80),
@@ -113,10 +113,10 @@ class Product {
   factory Product.fromMap(Map<String, dynamic> data, String id) {
     return Product(
       id: id,
-      name: data['nombre'],
-      price: data['precio'],
-      img: data['imagen'],
-      descripcion: data['descripcion'],
+      name: data['name'],
+      price: data['price'],
+      img: data['img_url'],
+      descripcion: data['description'],
     );
   }
 }
@@ -136,9 +136,9 @@ class ProductService {
 }
 
 class DatabaseFields {
-  static const String nombre = "nombre";
-  static const String precio = "precio";
-  static const String imagen = "imagen";
+  static const String nombre = "name";
+  static const String precio = "price";
+  static const String imagen = "img_url";
 }
 
 void addToFavorites(Product product) {
