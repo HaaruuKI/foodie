@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/ui/pages/cart_store/CartPage.dart';
 import 'package:foodie/ui/pages/details/details_page.dart';
 import 'package:foodie/ui/pages/login/login_page.dart';
-import 'package:foodie/ui/pages/menu/menus.dart';
+import 'package:foodie/ui/pages/menu/menu.dart';
 import 'package:foodie/ui/pages/register/sing_up.dart';
 import 'package:foodie/ui/pages/search/search_page.dart';
 import 'package:foodie/ui/pages/splash_screen/splashScreen.dart';
@@ -14,7 +14,7 @@ final routes = <String, WidgetBuilder>{
   'bienvenida': (BuildContext context) => const SplashScreen(),
 
   // Menu
-  'menuComida': (BuildContext context) => MenuComida(),
+  'menu_page': (BuildContext context) => const MenuPage(),
 
   // principal
   'menu': (BuildContext context) => const TabsPage(),
