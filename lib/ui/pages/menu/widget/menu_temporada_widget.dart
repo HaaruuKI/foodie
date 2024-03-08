@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodie/ui/colors.dart';
 
-class MenuComidaWidget extends StatelessWidget {
-  const MenuComidaWidget({super.key});
+class MenuTemporadaWidget extends StatelessWidget {
+  final String categoryText;
+
+  const MenuTemporadaWidget({super.key, required this.categoryText});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class MenuComidaWidget extends StatelessWidget {
         return StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('products')
-              .where('category', isEqualTo: 'bebida')
+              .where('category', isEqualTo: categoryText)
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {

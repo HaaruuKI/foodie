@@ -8,8 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodie/ui/pages/categories/categories.dart';
-import 'package:foodie/ui/pages/explore_tab/widget/Popular_widget.dart';
 import 'package:foodie/ui/pages/explore_tab/widget/more_widget.dart';
+import 'package:foodie/ui/pages/popular/popular_page.dart';
 import 'package:foodie/ui/widget/btn_cart.dart';
 import 'package:foodie/ui/widget/search.dart';
 
