@@ -10,6 +10,7 @@ class PopularesItem extends StatelessWidget {
   // final VoidCallback onTap;
 
   const PopularesItem({
+    super.key,
     required this.name,
     required this.price,
     required this.img,
@@ -33,7 +34,7 @@ class PopularesItem extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 3,
                 blurRadius: 10,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -44,37 +45,39 @@ class PopularesItem extends StatelessWidget {
               children: [
                 CachedNetworkImage(
                   imageUrl: img,
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Text(
                   name,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   "\$ $price",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 17,
                     color: amarillo,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.favorite_border,
+                      icon: const Icon(Icons.favorite_border,
                           color: amarillo, size: 26),
                       onPressed: () {
                         // addToFavorites(product);
                       },
                     ),
                     IconButton(
-                      icon:
-                          Icon(CupertinoIcons.cart, color: amarillo, size: 26),
+                      icon: const Icon(CupertinoIcons.cart,
+                          color: amarillo, size: 26),
                       onPressed: () {
                         // _showSnackbar(context, nombre);
                         // enviarDatosRealtimeDatabase(nombre, precio, imagenUrl);
