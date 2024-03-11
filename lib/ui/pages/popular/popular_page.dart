@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/popular.dart';
 import 'package:foodie/ui/pages/popular/widget/popular_widget.dart';
 
-class PopularesItemWidget extends StatefulWidget {
-  const PopularesItemWidget({Key? key});
+class PopularPage extends StatefulWidget {
+  const PopularPage({super.key});
 
   @override
-  _PopularesItemWidgetState createState() => _PopularesItemWidgetState();
+  _PopularPageState createState() => _PopularPageState();
 }
 
-class _PopularesItemWidgetState extends State<PopularesItemWidget> {
+class _PopularPageState extends State<PopularPage> {
   Future<List<PopularesItem>> _getPopularItems() async {
     ProductService productService = ProductService();
     List<Product> products =
@@ -26,14 +26,14 @@ class _PopularesItemWidgetState extends State<PopularesItemWidget> {
         name: name,
         price: price,
         img: img,
-        // onTap: () {
-        //   Navigator.pushNamed(context, 'itemPage', arguments: {
-        //     'name': name,
-        //     'price': price,
-        //     'img': img,
-        //     'des': product.descripcion,
-        //   });
-        // },
+        onTap: () {
+          Navigator.pushNamed(context, 'details', arguments: {
+            'name': name,
+            'price': price,
+            'img': img,
+            'des': product.descripcion,
+          });
+        },
       );
     }).toList();
   }

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, usekey_in_widgetconstructors, prefer_const_constructors, sizedbox_for_itespace, preferconst_literals_to_createimmutables, library__types_in_public_, use_buildcontext_synchronously
+// ignore_for_file: file_names, usekey_in_widgetconstructors, prefer_const_constructors, sizedbox_for_itespace, preferconst_literals_to_createimmutables, library__types_in_public_, use_buildcontext_synchronously, library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -183,7 +183,7 @@ class _CartPageState extends State<CartPage> {
                                         height: 80,
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 150,
                                       child: Column(
                                           crossAxisAlignment:
