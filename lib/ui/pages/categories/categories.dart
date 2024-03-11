@@ -5,27 +5,23 @@ class Categories extends StatelessWidget {
   final List<CategoryItem> categories = [
     CategoryItem(
       imagePath: 'assets/comidas.png',
-      routeName: 'menu_page',
-      id: 1,
+      category: 'comida',
     ),
     CategoryItem(
       imagePath: 'assets/bebidas.png',
-      routeName: 'menuBebida',
-      id: 2,
+      category: 'bebida',
     ),
     CategoryItem(
       imagePath: 'assets/snacks.png',
-      routeName: 'SnacksGuest',
-      id: 3,
+      category: 'snack',
     ),
     CategoryItem(
       imagePath: 'assets/temporada.png',
-      routeName: 'TemporadaGuest',
-      id: 4,
+      category: 'temporada',
     ),
   ];
 
-  Categories({super.key});
+  Categories({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +42,9 @@ class Categories extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, category.routeName,
-                                arguments: category.id);
+                            Navigator.pushNamed(context, 'menu_page',
+                                arguments: {'category': category.category});
+                            // print('category: ${category.category}');
                           },
                           child: Container(
                             padding: const EdgeInsets.all(8),
@@ -82,12 +79,10 @@ class Categories extends StatelessWidget {
 
 class CategoryItem {
   final String imagePath;
-  final String routeName;
-  final int id;
+  final String category;
 
   CategoryItem({
-    required this.id,
+    required this.category,
     required this.imagePath,
-    required this.routeName,
   });
 }

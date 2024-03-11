@@ -5,8 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodie/ui/colors.dart';
 
-class MenuSnackWidget extends StatelessWidget {
-  const MenuSnackWidget({super.key});
+class MenuWidget extends StatefulWidget {
+  const MenuWidget({super.key});
+
+  @override
+  State<MenuWidget> createState() => _MenuWidgetState();
+}
+
+class _MenuWidgetState extends State<MenuWidget> {
+  String? category;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    category = args['category'];
+    print('category: $category');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +32,11 @@ class MenuSnackWidget extends StatelessWidget {
         return StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('products')
-              .where('category', isEqualTo: 'snack')
+              .where('category', isEqualTo: category)
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -34,7 +49,7 @@ class MenuSnackWidget extends StatelessWidget {
                 final product = products?[index];
 
                 return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Container(
                     width: maxWidth,
                     height: 170,
@@ -46,7 +61,7 @@ class MenuSnackWidget extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 3,
                           blurRadius: 10,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         )
                       ],
                     ),
@@ -58,27 +73,27 @@ class MenuSnackWidget extends StatelessWidget {
                           },
                           child: Container(
                             alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
                             child: CachedNetworkImage(
                               imageUrl: product?['img_url'],
                               placeholder: (context, url) =>
-                                  CircularProgressIndicator(),
+                                  const CircularProgressIndicator(),
                               errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                                  const Icon(Icons.error),
                             ),
-                            height: 120,
-                            width: 120,
                           ),
                         ),
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
                                   product?['name'],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -90,14 +105,14 @@ class MenuSnackWidget extends StatelessWidget {
                                   itemCount: 5,
                                   itemSize: 18,
                                   itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 4),
+                                      const EdgeInsets.symmetric(horizontal: 4),
                                   itemBuilder: (context, _) =>
-                                      Icon(Icons.star, color: amarillo),
+                                      const Icon(Icons.star, color: amarillo),
                                   onRatingUpdate: (index) {},
                                 ),
                                 Text(
                                   "\$${product?['price']}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     color: amarillo,
                                     fontWeight: FontWeight.bold,
@@ -108,7 +123,7 @@ class MenuSnackWidget extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -116,7 +131,7 @@ class MenuSnackWidget extends StatelessWidget {
                                 onPressed: () {
                                   // addToFavorites(product);
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.favorite_border,
                                   color: amarillo,
                                   size: 26,
@@ -127,7 +142,7 @@ class MenuSnackWidget extends StatelessWidget {
                                   // _showSnackbar(context, product['nombre']);
                                   // enviarDatosRealtimeDatabase(product['nombre'], product['precio'], product['imagenUrl']);
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   CupertinoIcons.cart,
                                   color: amarillo,
                                   size: 26,
