@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "888038063008",
+    "firebase_url": "https://foodie-960f5-default-rtdb.firebaseio.com",
     "project_id": "foodie-960f5",
     "storage_bucket": "foodie-960f5.appspot.com"
   },
@@ -14,13 +15,21 @@
       },
       "oauth_client": [
         {
+          "client_id": "888038063008-m211uf3jefhe2eq50snphl2167djbmjl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.foodie",
+            "certificate_hash": "6aefd25a913a4fa188fb31b1d59514fa2f4b72a5"
+          }
+        },
+        {
           "client_id": "888038063008-283ctg3mut0nphlrc23qbdn6p6kteuoa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYvEFxvPdp1Gh2KfGBeGpEDrMMZt_ST1U"
+          "current_key": "AIzaSyDB16j90pTh7yLDbaMpQGBr42AcroEcxpE"
         }
       ],
       "services": {
@@ -29,6 +38,13 @@
             {
               "client_id": "888038063008-283ctg3mut0nphlrc23qbdn6p6kteuoa.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "888038063008-g6fe7r0bt8ahkmkg1d8qj9anel9vjurv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodie.RunnerTests"
+              }
             }
           ]
         }

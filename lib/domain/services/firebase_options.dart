@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,20 +46,31 @@ class DefaultFirebaseOptions {
     }
   }
 
+  // static const FirebaseOptions web = FirebaseOptions(
+  //   apiKey: 'AIzaSyDPV7z-rpBw5IkRBUgnJdJFWykRKCtsdQA',
+  //   appId: '1:888038063008:web:27631104756a011800c2c5',
+  //   messagingSenderId: '888038063008',
+  //   projectId: 'foodie-960f5',
+  //   authDomain: 'foodie-960f5.firebaseapp.com',
+  //   databaseURL: 'https://foodie-960f5-default-rtdb.firebaseio.com',
+  //   storageBucket: 'foodie-960f5.appspot.com',
+  // );
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDPV7z-rpBw5IkRBUgnJdJFWykRKCtsdQA',
-    appId: '1:888038063008:web:27631104756a011800c2c5',
-    messagingSenderId: '888038063008',
-    projectId: 'foodie-960f5',
-    authDomain: 'foodie-960f5.firebaseapp.com',
-    storageBucket: 'foodie-960f5.appspot.com',
+    apiKey: "AIzaSyDPV7z-rpBw5IkRBUgnJdJFWykRKCtsdQA",
+    authDomain: "foodie-960f5.firebaseapp.com",
+    databaseURL: "https://foodie-960f5-default-rtdb.firebaseio.com",
+    projectId: "foodie-960f5",
+    storageBucket: "foodie-960f5.appspot.com",
+    messagingSenderId: "888038063008",
+    appId: "1:888038063008:web:27631104756a011800c2c5",
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBYvEFxvPdp1Gh2KfGBeGpEDrMMZt_ST1U',
+    apiKey: 'AIzaSyDB16j90pTh7yLDbaMpQGBr42AcroEcxpE',
     appId: '1:888038063008:android:97a1dcd2cfeecab200c2c5',
     messagingSenderId: '888038063008',
     projectId: 'foodie-960f5',
+    databaseURL: 'https://foodie-960f5-default-rtdb.firebaseio.com',
     storageBucket: 'foodie-960f5.appspot.com',
   );
 
@@ -65,18 +79,12 @@ class DefaultFirebaseOptions {
     appId: '1:888038063008:ios:ada05ed0c42907c200c2c5',
     messagingSenderId: '888038063008',
     projectId: 'foodie-960f5',
+    databaseURL: 'https://foodie-960f5-default-rtdb.firebaseio.com',
     storageBucket: 'foodie-960f5.appspot.com',
-    iosClientId: '888038063008-ngam97fkbi6f6ei0kq55982sr5pk0r2c.apps.googleusercontent.com',
+    androidClientId:
+        '888038063008-m211uf3jefhe2eq50snphl2167djbmjl.apps.googleusercontent.com',
+    iosClientId:
+        '888038063008-ngam97fkbi6f6ei0kq55982sr5pk0r2c.apps.googleusercontent.com',
     iosBundleId: 'com.example.foodie',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDA8a0atlIVIHPkTGWGh_rlJvAaWYA1JBs',
-    appId: '1:888038063008:ios:78f3a041c208b0b400c2c5',
-    messagingSenderId: '888038063008',
-    projectId: 'foodie-960f5',
-    storageBucket: 'foodie-960f5.appspot.com',
-    iosClientId: '888038063008-g6fe7r0bt8ahkmkg1d8qj9anel9vjurv.apps.googleusercontent.com',
-    iosBundleId: 'com.example.foodie.RunnerTests',
   );
 }
