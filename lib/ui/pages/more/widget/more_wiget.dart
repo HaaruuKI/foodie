@@ -1,12 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/colors.dart';
 
 class MoreWidget extends StatefulWidget {
@@ -28,57 +26,14 @@ class MoreWidget extends StatefulWidget {
 }
 
 class _MoreWidgetState extends State<MoreWidget> {
-  static final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  static final FirebaseDatabase database = FirebaseDatabase.instance;
-  static const String nombre = "name";
-  static const String precio = "price";
-  static const String imagen = "img_url";
-
-  final DatabaseReference _databaseRef = database.ref();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? user;
-  String? userEmail;
-  String? userName;
-
   @override
   void initState() {
     super.initState();
-    _getCurrentUser();
-  }
-
-  Future<void> _getCurrentUser() async {
-    user = _auth.currentUser;
-    if (user != null) {
-      await _getUserData();
-    }
-  }
-
-  Future<void> _getUserData() async {
-    if (user!.providerData
-        .any((provider) => provider.providerId == 'google.com')) {
-      _getGoogleUserData();
-    } else {
-      _getEmailPasswordUserData();
-    }
-  }
-
-  Future<void> _getGoogleUserData() async {
-    userName = user!.displayName ?? "";
-    userEmail = user!.email ?? "";
-  }
-
-  Future<void> _getEmailPasswordUserData() async {
-    final userData = await firestore.collection('Users').doc(user!.uid).get();
-    if (userData.exists) {
-      setState(() {
-        userName = userData.get('name');
-        userEmail = userData.get('email');
-      });
-    }
+    LogIn().GetCurrentUser;
   }
 
   void enviarDatosRealtimeDatabase(String name, int price, String imgUrl) {
-    final userRef = _databaseRef.child("carts").child(user!.uid);
+    final userRef = LogIn.databaseRef.child("carts").child(LogIn.user!.uid);
     final productRef = userRef.child(name);
 
     userRef.child(name).get().then((snapshot) {
@@ -122,12 +77,12 @@ class _MoreWidgetState extends State<MoreWidget> {
 
   void addToFavorites(String name, int price, String imgUrl) {
     final productRef =
-        _databaseRef.child("favorites").child(user!.uid).child(name);
+        LogIn.databaseRef.child("favorites").child(LogIn.user!.uid).child(name);
 
     productRef.set({
-      nombre: widget.name,
-      precio: widget.price,
-      imagen: widget.img,
+      'name': widget.name,
+      'price': widget.price,
+      'img_url': widget.img,
     });
   }
 
@@ -207,7 +162,7 @@ class _MoreWidgetState extends State<MoreWidget> {
               children: [
                 IconButton(
                   onPressed: () {
-                    if (user != null) {
+                    if (LogIn.user != null) {
                       addToFavorites(widget.name, widget.price, widget.img);
                       print('usuario registrado');
                     } else {
@@ -222,7 +177,7 @@ class _MoreWidgetState extends State<MoreWidget> {
                 ),
                 IconButton(
                   onPressed: () {
-                    if (user != null) {
+                    if (LogIn.user != null) {
                       _showSnackbar(context, widget.name);
                       enviarDatosRealtimeDatabase(
                           widget.name, widget.price, widget.img);

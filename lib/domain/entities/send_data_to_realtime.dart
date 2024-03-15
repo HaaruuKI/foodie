@@ -1,12 +1,11 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, camel_case_types
 
-import 'package:foodie/domain/entities/sing_up.dart';
+import 'package:foodie/domain/entities/log_in.dart';
 
-class EnviarDatos {
+class SendDataToRealtime {
   static Future<void> EnviarDatosRealtimeDatabase(
       String name, int price, String imgUrl) async {
-    final userRef =
-        IniciarSesion.databaseRef.child("carts").child(IniciarSesion.user!.uid);
+    final userRef = LogIn.databaseRef.child("carts").child(LogIn.user!.uid);
     final productRef = userRef.child(name);
 
     userRef.child(name).get().then((snapshot) {

@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/add_to_favorites.dart';
-import 'package:foodie/domain/entities/enviar_datos.dart';
-import 'package:foodie/domain/entities/sing_up.dart';
-import 'package:foodie/domain/entities/snack_bar.dart';
+import 'package:foodie/domain/entities/send_data_to_realtime.dart';
+import 'package:foodie/domain/entities/log_in.dart';
+import 'package:foodie/domain/entities/snack_bar_send_data.dart';
 import 'package:foodie/ui/colors.dart';
 
 class PopularesItem extends StatefulWidget {
@@ -29,7 +29,7 @@ class _PopularesItemState extends State<PopularesItem> {
   @override
   void initState() {
     super.initState();
-    IniciarSesion().GetCurrentUser(context); // Call GetCurrentUser with context
+    LogIn().GetCurrentUser(context); // Call GetCurrentUser with context
   }
 
   @override
@@ -89,9 +89,9 @@ class _PopularesItemState extends State<PopularesItem> {
                       icon: const Icon(Icons.favorite_border,
                           color: amarillo, size: 26),
                       onPressed: () {
-                        if (IniciarSesion.user != null) {
+                        if (LogIn.user != null) {
                           AgregarFavoritos.AddToFavorite(
-                              widget.name, widget.price, widget.img);
+                              context, widget.name, widget.price, widget.img);
                           print('usuario registrado');
                         } else {
                           print('usuario no registrado');
@@ -102,9 +102,9 @@ class _PopularesItemState extends State<PopularesItem> {
                       icon: const Icon(CupertinoIcons.cart,
                           color: amarillo, size: 26),
                       onPressed: () {
-                        if (IniciarSesion.user != null) {
-                          ShowSnackBars.showSnackbar(context, widget.name);
-                          EnviarDatos.EnviarDatosRealtimeDatabase(
+                        if (LogIn.user != null) {
+                          ShowSnackBars.ShowSnackbar(context, widget.name);
+                          SendDataToRealtime.EnviarDatosRealtimeDatabase(
                               widget.name, widget.price, widget.img);
                           print('usuario registrado');
                         } else {

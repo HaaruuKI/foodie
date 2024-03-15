@@ -27,7 +27,7 @@ final routes = <String, WidgetBuilder>{
   // register
   'register': (BuildContext context) => const SignUp(),
   // cart
-  'cartPage': (BuildContext context) => const CartPage(),
+  'cartPage': (BuildContext context) => CartPage(),
   // Search
   'search': (BuildContext context) => const SearchPage(),
   // details

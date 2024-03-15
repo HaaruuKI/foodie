@@ -18,22 +18,22 @@ class ExploreTab extends StatefulWidget {
 class _ExploreTabState extends State<ExploreTab> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(0.0),
+          padding: EdgeInsets.all(0.0),
           child: Column(
             children: [
-              const Search(),
+              Search(),
               Categories(),
-              const PopularPage(),
-              const MorePage(),
-              const SizedBox(height: 80),
+              PopularPage(),
+              MorePage(),
+              SizedBox(height: 80),
             ],
           ),
         ),
       ),
-      floatingActionButton: const BtnCart(),
+      floatingActionButton: BtnCart(),
     );
   }
 }

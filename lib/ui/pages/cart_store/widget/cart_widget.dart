@@ -1,24 +1,18 @@
-// ignore_for_file: file_names, usekey_in_widgetconstructors, prefer_const_constructors, sizedbox_for_itespace, preferconst_literals_to_createimmutables, library__types_in_public_, use_buildcontext_synchronously, library_private_types_in_public_api, use_build_context_synchronously, unnecessary_import
+// ignore_for_file: file_names, usekey_in_widgetconstructors, prefer_const_constructors, sizedbox_for_itespace, preferconst_literals_to_createimmutables, library__types_in_public_, use_buildcontext_synchronously, library_private_types_in_public_api, use_build_context_synchronously
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/colors.dart';
-import 'package:foodie/ui/widget/btn_back.dart';
 
-class CartWidegt extends StatefulWidget {
-  const CartWidegt({super.key});
+class CartWidget extends StatefulWidget {
+  const CartWidget({super.key});
 
   @override
-  _CartWidegtState createState() => _CartWidegtState();
+  _CartWidgetState createState() => _CartWidgetState();
 }
 
-class _CartWidegtState extends State<CartWidegt> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? user;
-  final dbRef = FirebaseDatabase.instance.ref();
-
+class _CartWidgetState extends State<CartWidget> {
   List<Map<String, dynamic>> items = [];
 
   double totalQuantity = 0;
@@ -27,18 +21,13 @@ class _CartWidegtState extends State<CartWidegt> {
   @override
   void initState() {
     super.initState();
-    _getCurrentUser();
+    LogIn().GetCurrentUser;
     _getCartData();
-  }
-
-  Future<void> _getCurrentUser() async {
-    user = _auth.currentUser;
-    setState(() {});
+    // CartDataFetcher().GetCartData();
   }
 
   Future<void> _getCartData() async {
-    final cartRef = dbRef.child("carts").child(user!.uid);
-
+    final cartRef = LogIn.databaseRef.child("carts").child(LogIn.user!.uid);
     final snapshot = await cartRef.once();
     final data = snapshot.snapshot.value as Map<dynamic, dynamic>?;
     if (data != null) {
@@ -82,25 +71,37 @@ class _CartWidegtState extends State<CartWidegt> {
     final newQuantity = item['quantity'] - 1;
     if (newQuantity >= 1) {
       _updateCartData(key, newQuantity);
+      print(totalQuantity);
     } else {
       _deleteCartData(key);
+      if (totalQuantity <= 1) {
+        Navigator.pushNamed(context, 'menu');
+      }
     }
   }
 
   Future<void> _updateCartData(String key, int newQuantity) async {
-    await dbRef.child("carts").child(user!.uid).child(key).update({
+    await LogIn.databaseRef
+        .child("carts")
+        .child(LogIn.user!.uid)
+        .child(key)
+        .update({
       'quantity': newQuantity,
     });
     _getCartData();
   }
 
   Future<void> _deleteCartData(String key) async {
-    await dbRef.child("carts").child(user!.uid).child(key).remove();
+    await LogIn.databaseRef
+        .child("carts")
+        .child(LogIn.user!.uid)
+        .child(key)
+        .remove();
     _getCartData();
   }
 
   Future<void> _sendOrder() async {
-    final orderRef = dbRef.child("orders").child(user!.uid);
+    final orderRef = LogIn.databaseRef.child("orders").child(LogIn.user!.uid);
 
     final order = {
       "products": items.map((item) {
@@ -124,230 +125,224 @@ class _CartWidegtState extends State<CartWidegt> {
   }
 
   Future<void> _deleteCart() async {
-    await dbRef.child("carts").child(user!.uid).remove();
+    await LogIn.databaseRef.child("carts").child(LogIn.user!.uid).remove();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: btnBack(context),
-      ),
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.only(top: 0, left: 5, bottom: 5),
-            child: Text(
-              'Lista de ordenes',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        Padding(
+          padding: EdgeInsets.only(top: 0, left: 5, bottom: 5),
+          child: Text(
+            'Lista de ordenes',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                final item = items[index];
-                return ListTile(
-                  title: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 9),
-                              child: Container(
-                                width: 400,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 3,
-                                        blurRadius: 10,
-                                        offset: Offset(0, 3),
-                                      ),
-                                    ]),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: Image.network(
-                                        item['img'],
-                                        width: 130,
-                                        height: 80,
-                                      ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return ListTile(
+                title: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 9),
+                            child: Container(
+                              width: 400,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0, 3),
                                     ),
-                                    SizedBox(
-                                      width: 150,
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text(
-                                              item['name'],
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '\$${item['price'].toStringAsFixed(2)}',
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                                color: amarillo,
-                                              ),
-                                            ),
-                                          ]),
+                                  ]),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: Image.network(
+                                      item['img'],
+                                      width: 130,
+                                      height: 80,
                                     ),
-                                    Expanded(
-                                      child: Column(
+                                  ),
+                                  SizedBox(
+                                    width: 150,
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
-                                          const SizedBox(height: 13),
-                                          InkWell(
-                                            onTap: () {
-                                              _incrementQuantity(item['key']);
-                                            },
-                                            child: Icon(
-                                              Icons.add,
-                                              color: Colors.black,
-                                            ),
+                                          Text(
+                                            item['name'],
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            '${item['quantity']}',
+                                            '\$${item['price'].toStringAsFixed(2)}',
                                             style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              _decrementQuantity(item['key']);
-                                            },
-                                            child: Icon(
-                                              Icons.remove,
-                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: amarillo,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ]),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(height: 13),
+                                        InkWell(
+                                          onTap: () {
+                                            _incrementQuantity(item['key']);
+                                          },
+                                          child: Icon(
+                                            Icons.add,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        Text(
+                                          '${item['quantity']}',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            _decrementQuantity(item['key']);
+                                          },
+                                          child: Icon(
+                                            Icons.remove,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 3,
+                    blurRadius: 10,
+                    offset: Offset(0, 3),
                   ),
-                );
-              },
+                ]),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Producto:',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Text(
+                          totalQuantity.toStringAsFixed(0),
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ]),
+                ),
+                Divider(
+                  color: Colors.black,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Total:',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '\$${totalPrice.toStringAsFixed(2)}',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: amarillo,
+                          ),
+                        ),
+                      ]),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: _sendOrder,
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateColor.resolveWith(
+                                  (states) => amarillo)),
+                          child: Text(
+                            'Pagar',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ]),
+                ),
+              ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-            child: Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 3,
-                      blurRadius: 10,
-                      offset: Offset(0, 3),
-                    ),
-                  ]),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Producto:',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Text(
-                            totalQuantity.toStringAsFixed(0),
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ]),
-                  ),
-                  Divider(
-                    color: Colors.black,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Total:',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '\$${totalPrice.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: amarillo,
-                            ),
-                          ),
-                        ]),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: _sendOrder,
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateColor.resolveWith(
-                                    (states) => amarillo)),
-                            child: Text(
-                              'Pagar',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          )
-                        ]),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -1,10 +1,17 @@
+// ignore_for_file: avoid_print, non_constant_identifier_names
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodie/domain/entities/add_to_favorites.dart';
+import 'package:foodie/domain/entities/log_in.dart';
+import 'package:foodie/domain/entities/send_data_to_realtime.dart';
+import 'package:foodie/domain/entities/snack_bar_send_data.dart';
 import 'package:foodie/ui/colors.dart';
 import 'package:foodie/ui/widget/btn_back.dart';
+import 'package:foodie/ui/widget/btn_cart.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -19,9 +26,9 @@ class _MenuPageState extends State<MenuPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
     final args = ModalRoute.of(context)!.settings.arguments as Map;
     category = args['category'];
-    // print('category: $category');
   }
 
   @override
@@ -58,11 +65,15 @@ class _MenuPageState extends State<MenuPage> {
                     }
 
                     final products = snapshot.data?.docs;
-
                     return ListView.builder(
                       itemCount: products?.length,
                       itemBuilder: (context, index) {
                         final product = products?[index];
+                        final String? name = product?['name'];
+                        final int price = product?['price'];
+                        final String img_url = product?['img_url'];
+                        final String des = product?['description'];
+                        // final String status = product?['status'];
 
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
@@ -85,14 +96,20 @@ class _MenuPageState extends State<MenuPage> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    // Navigator.pushNamed(context, 'itemPage');
+                                    Navigator.pushNamed(context, 'details',
+                                        arguments: {
+                                          'name': name,
+                                          'price': price,
+                                          'img': img_url,
+                                          'des': des,
+                                        });
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
                                     height: 120,
                                     width: 120,
                                     child: CachedNetworkImage(
-                                      imageUrl: product?['img_url'],
+                                      imageUrl: img_url,
                                       placeholder: (context, url) =>
                                           const CircularProgressIndicator(),
                                       errorWidget: (context, url, error) =>
@@ -111,7 +128,7 @@ class _MenuPageState extends State<MenuPage> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         Text(
-                                          product?['name'],
+                                          name!,
                                           style: const TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.bold,
@@ -132,7 +149,7 @@ class _MenuPageState extends State<MenuPage> {
                                           onRatingUpdate: (index) {},
                                         ),
                                         Text(
-                                          "\$${product?['price']}",
+                                          "\$$price",
                                           style: const TextStyle(
                                             fontSize: 20,
                                             color: amarillo,
@@ -152,7 +169,13 @@ class _MenuPageState extends State<MenuPage> {
                                     children: [
                                       IconButton(
                                         onPressed: () {
-                                          // addToFavorites(product);
+                                          if (LogIn.user != null) {
+                                            AgregarFavoritos.AddToFavorite(
+                                                context, name, price, img_url);
+                                            print('usuario registrado');
+                                          } else {
+                                            print('usuario no registrado');
+                                          }
                                         },
                                         icon: const Icon(
                                           Icons.favorite_border,
@@ -162,8 +185,16 @@ class _MenuPageState extends State<MenuPage> {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          // _showSnackbar(context, product['nombre']);
-                                          // enviarDatosRealtimeDatabase(product['nombre'], product['precio'], product['imagenUrl']);
+                                          if (LogIn.user != null) {
+                                            SendDataToRealtime
+                                                .EnviarDatosRealtimeDatabase(
+                                                    name, price, img_url);
+                                            ShowSnackBars.ShowSnackbar(
+                                                context, name);
+                                            print('usuario registrado');
+                                          } else {
+                                            print('usuario no registrado');
+                                          }
                                         },
                                         icon: const Icon(
                                           CupertinoIcons.cart,
@@ -187,6 +218,7 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ],
       ),
+      floatingActionButton: const BtnCart(),
     );
   }
 }

@@ -1,12 +1,12 @@
-// ignore_for_file: file_names, use_key_in_widget_constructors, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: file_names, use_key_in_widget_constructors, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, library_private_types_in_public_api
 
 import 'package:clippy_flutter/arc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodie/domain/entities/log_in.dart';
+import 'package:foodie/domain/entities/send_data_to_realtime.dart';
+import 'package:foodie/domain/entities/snack_bar_send_data.dart';
 import 'package:foodie/ui/colors.dart';
 import 'package:foodie/ui/widget/btn_back.dart';
 
@@ -31,77 +31,10 @@ class _DetailsPageState extends State<DetailsPage> {
     des = args['des'];
   }
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? user;
-  String userEmail = "";
-  String userName = "";
-
-  static final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  static final FirebaseDatabase database = FirebaseDatabase.instance;
-
   @override
   void initState() {
     super.initState();
-    _getCurrentUser();
-  }
-
-  Future<void> _getCurrentUser() async {
-    user = _auth.currentUser;
-    if (user != null) {
-      await _getUserData();
-    }
-  }
-
-  Future<void> _getUserData() async {
-    if (user!.providerData
-        .any((provider) => provider.providerId == 'google.com')) {
-      _getGoogleUserData();
-    } else {
-      _getEmailPasswordUserData();
-    }
-  }
-
-  Future<void> _getGoogleUserData() async {
-    userName = user!.displayName ?? "";
-    userEmail = user!.email ?? "";
-  }
-
-  Future<void> _getEmailPasswordUserData() async {
-    final userData = await firestore.collection('Users').doc(user!.uid).get();
-    if (userData.exists) {
-      setState(() {
-        userName = userData.get('name');
-        userEmail = userData.get('email');
-      });
-    }
-  }
-
-  final DatabaseReference _databaseRef = database.ref();
-
-  void enviarDatosRealtimeDatabase(String name, int price, String imgUrl) {
-    final userRef = _databaseRef.child("carts").child(user!.uid);
-    final productRef = userRef.child(name);
-
-    userRef.child(name).get().then((snapshot) {
-      if (snapshot.exists) {
-        // Producto ya existe, actualizar quantity
-        int existingQuantity = snapshot.child("quantity").value as int;
-        productRef.set({
-          "nombre": name,
-          "precio": price,
-          "imagen": img,
-          "quantity": existingQuantity + 1,
-        });
-      } else {
-        // Producto no existe, agregar nuevo
-        productRef.set({
-          "nombre": name,
-          "precio": price,
-          "imagen": img,
-          "quantity": 1,
-        });
-      }
-    });
+    LogIn().GetCurrentUser;
   }
 
   @override
@@ -215,8 +148,10 @@ class _DetailsPageState extends State<DetailsPage> {
             ]),
             ElevatedButton.icon(
               onPressed: () {
-                if (user != null) {
-                  enviarDatosRealtimeDatabase(name!, price!, img!);
+                if (LogIn.user != null) {
+                  SendDataToRealtime.EnviarDatosRealtimeDatabase(
+                      name!, price!, img!);
+                  ShowSnackBars.ShowSnackbar(context, name!);
                 } else {
                   Navigator.pushNamed(context, 'profile');
                 }

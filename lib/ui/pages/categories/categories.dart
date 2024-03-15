@@ -1,27 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/categories/category_list.dart';
+import 'package:foodie/domain/entities/categories/send_categorie.dart';
 
 class Categories extends StatelessWidget {
-  final List<CategoryItem> categories = [
-    CategoryItem(
-      imagePath: 'assets/comidas.png',
-      category: 'comida',
-    ),
-    CategoryItem(
-      imagePath: 'assets/bebidas.png',
-      category: 'bebida',
-    ),
-    CategoryItem(
-      imagePath: 'assets/snacks.png',
-      category: 'snack',
-    ),
-    CategoryItem(
-      imagePath: 'assets/temporada.png',
-      category: 'temporada',
-    ),
-  ];
-
-  Categories({Key? key});
+  const Categories({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +19,12 @@ class Categories extends StatelessWidget {
             ),
             const SizedBox(height: 26),
             Row(
-              children: categories
+              children: CategoryList.categories
                   .map((category) => Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, 'menu_page',
-                                arguments: {'category': category.category});
-                            // print('category: ${category.category}');
-                          },
+                          onTap: () => BtnCategorie.NavigateToMenuPage(
+                              context, category.category),
                           child: Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
@@ -75,14 +54,4 @@ class Categories extends StatelessWidget {
       ),
     );
   }
-}
-
-class CategoryItem {
-  final String imagePath;
-  final String category;
-
-  CategoryItem({
-    required this.category,
-    required this.imagePath,
-  });
 }

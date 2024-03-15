@@ -40,19 +40,31 @@ class _MorePageState extends State<MorePage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _getNewetsItems(),
-      builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
-          return Column(
-            children: snapshot.data!,
-          );
-        }
-      },
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 20, left: 10),
+          child: Text(
+            "Mas Productos",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+          ),
+        ),
+        FutureBuilder(
+          future: _getNewetsItems(),
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              return Column(
+                children: snapshot.data!,
+              );
+            }
+          },
+        ),
+      ],
     );
   }
 }

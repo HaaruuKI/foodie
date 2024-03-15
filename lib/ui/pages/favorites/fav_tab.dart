@@ -1,9 +1,7 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors, prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, use_build_context_synchronously
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/colors.dart';
 
 // ... (import statements y otras declaraciones)
@@ -15,26 +13,17 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? user;
-
   List<Map<String, dynamic>> items = [];
 
   @override
   void initState() {
     super.initState();
-    _getCurrentUser();
+    LogIn().GetCurrentUser;
     _getCartData();
   }
 
-  Future<void> _getCurrentUser() async {
-    user = _auth.currentUser;
-    setState(() {});
-  }
-
   Future<void> _getCartData() async {
-    final databaseRef = FirebaseDatabase.instance.ref();
-    final cartRef = databaseRef.child("favorites").child(user!.uid);
+    final cartRef = LogIn.databaseRef.child("favorites").child(LogIn.user!.uid);
 
     final snapshot = await cartRef.once();
     final data = snapshot.snapshot.value as Map<dynamic, dynamic>?;
@@ -81,8 +70,7 @@ class _FavoritesState extends State<Favorites> {
   }
 
   Future<void> _deleteCart() async {
-    final databaseRef = FirebaseDatabase.instance.ref();
-    final cartRef = databaseRef.child("favorites").child(user!.uid);
+    final cartRef = LogIn.databaseRef.child("favorites").child(LogIn.user!.uid);
     await cartRef.remove();
   }
 
@@ -101,13 +89,12 @@ class _FavoritesState extends State<Favorites> {
   }
 
   void enviarDatosRealtimeDatabase(String name, double price, String imgUrl) {
-    final databaseRef = FirebaseDatabase.instance.ref();
-    final userRef = databaseRef.child("carts").child(user!.uid);
+    final userRef = LogIn.databaseRef.child("carts").child(LogIn.user!.uid);
     final productRef = userRef.child(name);
 
-    databaseRef
+    LogIn.databaseRef
         .child("carts")
-        .child(user!.uid)
+        .child(LogIn.user!.uid)
         .child(name)
         .get()
         .then((snapshot) {
@@ -140,9 +127,11 @@ class _FavoritesState extends State<Favorites> {
 
   //** Borrar producto agregado a favorito
   Future<void> _deleteItem(String itemKey) async {
-    final databaseRef = FirebaseDatabase.instance.ref();
-    final cartRef = databaseRef.child("favorites").child(user!.uid);
+    final cartRef = LogIn.databaseRef.child("favorites").child(LogIn.user!.uid);
     await cartRef.child(itemKey).remove();
+    setState(() {
+      items.removeWhere((element) => element['key'] == itemKey);
+    });
   }
   //** Borrar producto agregado a favorito
 

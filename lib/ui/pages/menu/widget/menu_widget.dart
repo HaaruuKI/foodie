@@ -3,6 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+// import 'package:foodie/domain/entities/add_to_favorites.dart';
+import 'package:foodie/domain/entities/log_in.dart';
+// import 'package:foodie/domain/entities/snack_bar_favorites.dart';
 import 'package:foodie/ui/colors.dart';
 
 class MenuWidget extends StatefulWidget {
@@ -13,7 +16,13 @@ class MenuWidget extends StatefulWidget {
 }
 
 class _MenuWidgetState extends State<MenuWidget> {
-  String? category;
+  String category = 'comida';
+
+  @override
+  void initState() {
+    super.initState();
+    LogIn().GetCurrentUser(context); // Call GetCurrentUser with context
+  }
 
   @override
   void didChangeDependencies() {
@@ -47,6 +56,9 @@ class _MenuWidgetState extends State<MenuWidget> {
               itemCount: products?.length,
               itemBuilder: (context, index) {
                 final product = products?[index];
+                // final String? name = product?['name'];
+                // final String? price = product?['price'];
+                // final String? img = product?['img_url'];
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -129,7 +141,19 @@ class _MenuWidgetState extends State<MenuWidget> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  // addToFavorites(product);
+                                  print('usuario: ${LogIn.user}');
+                                  // if (LogIn.user != null) {
+                                  //   AgregarFavoritos.AddToFavorite(
+                                  //       product?['name'],
+                                  //       product?['price'],
+                                  //       product?['img_url']);
+                                  //   ShowSnackBarsFavorites
+                                  //       .ShowSnackBarsFavorite(
+                                  //           context, product?['name']);
+                                  //   print('usuario registrado');
+                                  // } else {
+                                  //   print('usuario no registrado');
+                                  // }
                                 },
                                 icon: const Icon(
                                   Icons.favorite_border,

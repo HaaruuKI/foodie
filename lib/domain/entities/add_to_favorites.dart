@@ -1,19 +1,19 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:foodie/domain/entities/sing_up.dart';
+import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/log_in.dart';
 
 class AgregarFavoritos {
   static Future<void> AddToFavorite(
-      String name, int price, String imgUrl) async {
-    final userRef =
-        IniciarSesion.databaseRef.child("carts").child(IniciarSesion.user!.uid);
+      BuildContext context, String name, int price, String imgUrl) async {
+    final userRef = LogIn.databaseRef.child("favorites").child(LogIn.user!.uid);
     final productRef = userRef.child(name);
 
     userRef.child(name).get().then((snapshot) {
       productRef.set({
-        "nombre": name,
-        "precio": price,
-        "imagen": imgUrl,
+        "name": name,
+        "price": price,
+        "img_url": imgUrl,
       });
     });
   }
