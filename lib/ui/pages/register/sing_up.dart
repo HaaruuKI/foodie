@@ -7,7 +7,7 @@ import 'package:foodie/ui/button.dart';
 import 'package:foodie/ui/colors.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+  const SignUp({Key? key});
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -83,11 +83,14 @@ class _SignUpState extends State<SignUp> {
                             'numero': _numeroController.text,
                           });
 
+                          // Autenticar cuenta
+                          await FirebaseAuth.instance.currentUser!
+                              .sendEmailVerification();
+
                           // Mostrar mensaje de éxito
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text(
-                                      'Usuario registrado correctamente')));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text(
+                                  'Usuario registrado correctamente. Por favor, verifica tu correo electrónico')));
 
                           // Redirigir al usuario a la pantalla de inicio
                           Navigator.of(context).pop();

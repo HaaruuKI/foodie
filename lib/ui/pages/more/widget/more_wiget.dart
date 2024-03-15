@@ -11,7 +11,7 @@ import 'package:foodie/ui/colors.dart';
 
 class MoreWidget extends StatefulWidget {
   final String name;
-  final double price;
+  final int price;
   final String img;
   final VoidCallback onTap;
 
@@ -77,7 +77,7 @@ class _MoreWidgetState extends State<MoreWidget> {
     }
   }
 
-  void enviarDatosRealtimeDatabase(String name, double price, String imgUrl) {
+  void enviarDatosRealtimeDatabase(String name, int price, String imgUrl) {
     final userRef = _databaseRef.child("carts").child(user!.uid);
     final productRef = userRef.child(name);
 
@@ -120,7 +120,7 @@ class _MoreWidgetState extends State<MoreWidget> {
     );
   }
 
-  void addToFavorites(String name, double price, String imgUrl) {
+  void addToFavorites(String name, int price, String imgUrl) {
     final productRef =
         _databaseRef.child("favorites").child(user!.uid).child(name);
 

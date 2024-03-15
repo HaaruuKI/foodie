@@ -44,9 +44,9 @@ class _FavoritesState extends State<Favorites> {
         final product = Map<String, dynamic>.from(value as dynamic);
         items.add({
           'key': key,
-          'name': product['nombre'],
-          'price': product['precio'],
-          'img': product['imagen'],
+          'name': product['name'],
+          'price': product['price'],
+          'img': product['img_url'],
         });
       });
       if (mounted) {
@@ -66,9 +66,9 @@ class _FavoritesState extends State<Favorites> {
           final product = Map<String, dynamic>.from(value as dynamic);
           items.add({
             'key': key,
-            'name': product['nombre'],
-            'price': product['precio'],
-            'img': product['imagen'],
+            'name': product['name'],
+            'price': product['price'],
+            'img': product['img_url'],
           });
         });
         if (mounted) {
@@ -155,7 +155,7 @@ class _FavoritesState extends State<Favorites> {
           Padding(
             padding: EdgeInsets.only(top: 0, left: 5, bottom: 5),
             child: Text(
-              'Favorites',
+              'Favoritos',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ),

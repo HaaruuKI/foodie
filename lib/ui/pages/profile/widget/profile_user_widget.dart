@@ -77,7 +77,7 @@ class _ProfileState extends State<Profile> {
       const SizedBox(height: 20),
       TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, 'historial');
+          Navigator.pushNamed(context, 'history');
         },
         child: const Text(
           'Historial de ordenes',

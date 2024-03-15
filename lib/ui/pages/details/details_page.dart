@@ -17,7 +17,7 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   String? name;
-  double? price;
+  int? price;
   String? img;
   String? des;
 
@@ -78,7 +78,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
   final DatabaseReference _databaseRef = database.ref();
 
-  void enviarDatosRealtimeDatabase(String name, double price, String imgUrl) {
+  void enviarDatosRealtimeDatabase(String name, int price, String imgUrl) {
     final userRef = _databaseRef.child("carts").child(user!.uid);
     final productRef = userRef.child(name);
 
@@ -215,7 +215,11 @@ class _DetailsPageState extends State<DetailsPage> {
             ]),
             ElevatedButton.icon(
               onPressed: () {
-                Navigator.pushNamed(context, 'perfilGuest');
+                if (user != null) {
+                  enviarDatosRealtimeDatabase(name!, price!, img!);
+                } else {
+                  Navigator.pushNamed(context, 'profile');
+                }
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(amarillo),

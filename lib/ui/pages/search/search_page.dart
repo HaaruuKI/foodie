@@ -64,7 +64,7 @@ class _SearchPageState extends State<SearchPage> {
                           border: InputBorder.none,
                         ),
                         onChanged: (text) {
-                          _searchFirestore(text);
+                          _searchFirestore(text.toLowerCase());
                         },
                       ),
                     ),
@@ -92,6 +92,10 @@ class _SearchPageState extends State<SearchPage> {
                       child: ListTile(
                         title: Text(_results[index]['name']),
                         subtitle: Text('\$ ${_results[index]['price']}'),
+                        trailing: Text(
+                          'mas detalles',
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ),
                     ),
                   ],

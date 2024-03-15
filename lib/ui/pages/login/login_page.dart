@@ -121,19 +121,26 @@ class _LoginPageState extends State<LoginPage> {
                                 child: const Text('Iniciar sesión'),
                               ),
                               const SizedBox(height: 20),
+                              const Text(
+                                '¿Olvidaste tu contraseña?',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20.0),
+                              ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(
-                                      context, 'GoogleOrFoodie');
+                                  Navigator.pushNamed(context, 'recoverPass');
                                 },
                                 child: const Text(
-                                  '¿Olvidaste tu contraseña?',
+                                  'Recuperar',
                                   style: TextStyle(
-                                      color: Colors.black,
+                                      color: Color.fromARGB(255, 247, 196, 31),
                                       fontWeight: FontWeight.w400,
                                       fontSize: 20.0),
                                 ),
                               ),
+                              const SizedBox(height: 20),
                               Center(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,

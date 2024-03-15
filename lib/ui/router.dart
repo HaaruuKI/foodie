@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/pages/cart_store/cart_page.dart';
 import 'package:foodie/ui/pages/details/details_page.dart';
+import 'package:foodie/ui/pages/history_order/history_order.dart';
 import 'package:foodie/ui/pages/login/login_page.dart';
 import 'package:foodie/ui/pages/menu/menu.dart';
 import 'package:foodie/ui/pages/profile/profile_tab.dart';
+import 'package:foodie/ui/pages/recover_password/recuperarpass.dart';
 import 'package:foodie/ui/pages/register/sing_up.dart';
 import 'package:foodie/ui/pages/search/search_page.dart';
 import 'package:foodie/ui/pages/splash_screen/splashScreen.dart';
@@ -15,7 +17,7 @@ final routes = <String, WidgetBuilder>{
   'bienvenida': (BuildContext context) => const SplashScreen(),
 
   // Menu
-  'menu_page': (BuildContext context) => const MenuPage(),
+  'menu_page': (BuildContext context) => MenuPage(),
 
   // principal
   'menu': (BuildContext context) => const TabsPage(),
@@ -32,4 +34,8 @@ final routes = <String, WidgetBuilder>{
   'details': (BuildContext context) => DetailsPage(),
   // profile
   'profile': (BuildContext context) => const ProfileUser(),
+  // history
+  'history': (BuildContext context) => const HistoryOrder(),
+  // recover password
+  'recoverPass': (BuildContext context) => const RecoverPassword(),
 };
