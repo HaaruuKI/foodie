@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, usekey_in_widgetconstructors, prefer_const_constructors, sizedbox_for_itespace, preferconst_literals_to_createimmutables, library__types_in_public_, use_buildcontext_synchronously, library_private_types_in_public_api, use_build_context_synchronously
+// ignore_for_file: file_names, usekey_in_widgetconstructors, prefer_const_constructors, sizedbox_for_itespace, preferconst_literals_to_createimmutables, library__types_in_public_, use_buildcontext_synchronously, library_private_types_in_public_api, use_build_context_synchronously, unnecessary_import, avoid_print
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -101,6 +101,8 @@ class _CartWidgetState extends State<CartWidget> {
   }
 
   Future<void> _sendOrder() async {
+    // PayWithMercadoPago().EjecutarMercadoPago();
+
     final orderRef = LogIn.databaseRef.child("orders").child(LogIn.user!.uid);
 
     final order = {
@@ -335,7 +337,21 @@ class _CartWidgetState extends State<CartWidget> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        )
+                        ),
+                        // ElevatedButton(
+                        //   onPressed: PayWithMercadoPago().EjecutarGetPreference,
+                        //   style: ButtonStyle(
+                        //       backgroundColor: MaterialStateColor.resolveWith(
+                        //           (states) => amarillo)),
+                        //   child: Text(
+                        //     'Ver preference',
+                        //     style: TextStyle(
+                        //       color: Colors.white,
+                        //       fontSize: 20,
+                        //       fontWeight: FontWeight.bold,
+                        //     ),
+                        //   ),
+                        // )
                       ]),
                 ),
               ],

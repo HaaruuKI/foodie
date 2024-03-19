@@ -4,10 +4,12 @@ import 'package:foodie/ui/pages/details/details_page.dart';
 import 'package:foodie/ui/pages/history_order/history_order.dart';
 import 'package:foodie/ui/pages/login/login_page.dart';
 import 'package:foodie/ui/pages/menu/menu.dart';
+import 'package:foodie/ui/pages/order_qr/order_qr_page.dart';
 import 'package:foodie/ui/pages/profile/profile_tab.dart';
 import 'package:foodie/ui/pages/recover_password/recuperarpass.dart';
 import 'package:foodie/ui/pages/register/sing_up.dart';
 import 'package:foodie/ui/pages/search/search_page.dart';
+import 'package:foodie/ui/pages/settings/settings_page.dart';
 import 'package:foodie/ui/pages/splash_screen/splashScreen.dart';
 import 'package:foodie/ui/pages/tabs/tabs_page.dart';
 
@@ -38,4 +40,8 @@ final routes = <String, WidgetBuilder>{
   'history': (BuildContext context) => const HistoryOrder(),
   // recover password
   'recoverPass': (BuildContext context) => const RecoverPassword(),
+  // Generate QR Page
+  'orderQR': (BuildContext context) => OrderQRPage(),
+  // settigns
+  'settings': (context) => const SettingsPage(),
 };

@@ -17,17 +17,19 @@ class TabsPage extends StatefulWidget {
 class _TabsPageState extends State<TabsPage> {
   //Arreglo de objetos.
   final List<Widget> _widgetOptions = [
-    ExploreTab(),
-    Order(),
-    Favorites(),
-    ProfileUser(),
+    const ExploreTab(),
+    const Order(),
+    const Favorites(),
+    const ProfileUser(),
+    // Pay(),
   ];
 
   final List<Widget> _widgetOptionsGuest = [
-    ExploreTab(),
+    const ExploreTab(),
     // Order(),r
     // Favorites(),
-    ProfileUser(),
+    const ProfileUser(),
+    // const Pay(),
   ];
 
   //declaracion variable tipo entero para jugar con los indices del arreglo.

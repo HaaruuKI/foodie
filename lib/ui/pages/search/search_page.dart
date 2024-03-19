@@ -58,6 +58,7 @@ class _SearchPageState extends State<SearchPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        autofocus: true,
                         controller: _searchController,
                         decoration: InputDecoration(
                           hintText: 'Buscar...',

@@ -1,5 +1,7 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors, prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, use_build_context_synchronously
 
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -83,57 +85,80 @@ class _OrderState extends State<Order> {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 final order = orders[index];
-                return Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Orden ${order['key']}',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Fecha: ${DateTime.fromMicrosecondsSinceEpoch(order['timestamp']).toString()}',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Productos:',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        Column(
-                          children: order['products']
-                              .map<Widget>(
-                                (product) => Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 4),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        '${product['name']} - ${product['quantity']} unidades - ${product['price'].toStringAsFixed(2)}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ],
+                return GestureDetector(
+                  onTap: () =>
+                      Navigator.pushNamed(context, 'orderQR', arguments: {
+                    'key': order['key'],
+                    'products': order['products'],
+                    'totalPrice': order['totalPrice'],
+                    'timestamp': order['timestamp'],
+                  }),
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Orden ${order['key']}',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Fecha: ${DateTime.fromMicrosecondsSinceEpoch(order['timestamp']).toString()}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Productos:',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          Column(
+                            children: order['products']
+                                .map<Widget>(
+                                  (product) => Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 4),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          '${product['name']} - ${product['quantity']} C/unidad - ${product['price'].toStringAsFixed(2)}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Total: \$${order['totalPrice'].toStringAsFixed(2)}',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'Estado: ${order['state']}',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                                )
+                                .toList(),
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Total: \$${order['totalPrice'].toStringAsFixed(2)}',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Estado: ${order['state']}',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          Center(
+                            child: Text(
+                              'Preciona para geenerar QR',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: amarillo),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

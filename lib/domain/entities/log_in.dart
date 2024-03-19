@@ -1,20 +1,27 @@
+// ignore_for_file: unused_field, non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LogIn {
   static final FirebaseFirestore firestore = FirebaseFirestore.instance;
   static final FirebaseDatabase database = FirebaseDatabase.instance;
 
   static final DatabaseReference databaseRef = database.ref();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final FirebaseAuth auth = FirebaseAuth.instance;
+  static final GoogleSignIn googleSignIn = GoogleSignIn();
+
   static User? user;
-  String? userEmail;
-  String? userName;
+  static String? userEmail;
+  static String? userName;
+  static String? userLastName;
+  static String? userNumPhone;
 
   Future<void> GetCurrentUser(BuildContext context) async {
-    user = _auth.currentUser;
+    user = auth.currentUser;
     if (user != null) {
       await _getUserData();
     }
@@ -39,6 +46,8 @@ class LogIn {
     if (userData.exists) {
       userName = userData.get('name');
       userEmail = userData.get('email');
+      userLastName = userData.get('lastname');
+      userNumPhone = userData.get('numero');
     }
   }
 }
