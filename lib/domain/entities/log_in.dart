@@ -19,6 +19,7 @@ class LogIn {
   static String? userName;
   static String? userLastName;
   static String? userNumPhone;
+  static int? moneyfoodie;
 
   Future<void> GetCurrentUser(BuildContext context) async {
     user = auth.currentUser;
@@ -37,8 +38,16 @@ class LogIn {
   }
 
   Future<void> _getGoogleUserData() async {
-    userName = user!.displayName ?? "";
-    userEmail = user!.email ?? "";
+    final userData = await firestore.collection('Users').doc(user!.uid).get();
+    if (userData.exists) {
+      userName = userData.get('name');
+      userEmail = user!.email ?? "";
+      userLastName = userData.get('lastname');
+      userNumPhone = userData.get('numero');
+      moneyfoodie = userData.get('moneyfoodie');
+    }
+    // userName = user!.displayName ?? "";
+    // userEmail = user!.email ?? "";
   }
 
   Future<void> _getEmailPasswordUserData() async {
@@ -48,6 +57,7 @@ class LogIn {
       userEmail = userData.get('email');
       userLastName = userData.get('lastname');
       userNumPhone = userData.get('numero');
+      moneyfoodie = userData.get('moneyfoodie');
     }
   }
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,22 +29,14 @@ class _ProfileUserGuestState extends State<ProfileUserGuest> {
         onPressed: () async {
           User? user = await Authenticator.iniciarSesion(context);
           print(user?.displayName);
+          print(user?.uid);
           if (user != null) {
-            // ignore: use_build_context_synchronously
             Navigator.pushNamed(context, 'menu');
           }
         },
         icon: Image.asset('assets/google512px.png', scale: 25),
         label: const Text('Entrar con Google.'),
       ),
-      const SizedBox(height: 20),
-      // ElevatedButton(
-      //   style: buttonPrimary,
-      //   onPressed: () {
-      //     Navigator.pushNamed(context, 'CrearProducto');
-      //   },
-      //   child: const Text('Crear producto'),
-      // ),
     ]);
   }
 }

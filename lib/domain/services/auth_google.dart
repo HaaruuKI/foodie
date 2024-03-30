@@ -14,6 +14,7 @@ class Authenticator {
     credenciales*/
     FirebaseAuth authenticator = FirebaseAuth.instance;
     User? user;
+
 //Un objeto de tipo signIn que nos ayudara con el inicio de sesion.
     GoogleSignIn objGoogleSignIn = GoogleSignIn();
 /*Objeto que guarda los datos de la cuenta de inicio de sesion que llama al objeto SignIn y su metodo
@@ -33,14 +34,6 @@ credenciales para el usuario*/
             await authenticator.signInWithCredential(credential);
 
         user = userCredential.user;
-
-        // // Obtener nombre y correo electrónico
-        // String nombre = user!.displayName!;
-        // String correo = user.email!;
-
-        // // Imprimir datos
-        // print("Nombre: $nombre");
-        // print("Correo electrónico: $correo");
 
         return user;
       } on FirebaseAuthException catch (e) {

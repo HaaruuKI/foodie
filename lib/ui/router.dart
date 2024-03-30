@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/ui/pages/cart_store/cart_page.dart';
+import 'package:foodie/ui/pages/cart_store/shopping_cart_page.dart';
 import 'package:foodie/ui/pages/details/details_page.dart';
 import 'package:foodie/ui/pages/history_order/history_order.dart';
 import 'package:foodie/ui/pages/login/login_page.dart';
@@ -8,6 +8,7 @@ import 'package:foodie/ui/pages/order_qr/order_qr_page.dart';
 import 'package:foodie/ui/pages/profile/profile_tab.dart';
 import 'package:foodie/ui/pages/recover_password/recuperarpass.dart';
 import 'package:foodie/ui/pages/register/sing_up.dart';
+import 'package:foodie/ui/pages/register_google/register_google_page.dart';
 import 'package:foodie/ui/pages/search/search_page.dart';
 import 'package:foodie/ui/pages/settings/settings_page.dart';
 import 'package:foodie/ui/pages/splash_screen/splashScreen.dart';
@@ -44,4 +45,6 @@ final routes = <String, WidgetBuilder>{
   'orderQR': (BuildContext context) => OrderQRPage(),
   // settigns
   'settings': (context) => const SettingsPage(),
+  // register google
+  'registerGoogle': (context) => const RegisterGooglePage(),
 };

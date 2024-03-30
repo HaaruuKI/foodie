@@ -4,21 +4,6 @@ import 'package:foodie/domain/services/firebase_options.dart';
 import 'package:foodie/ui/colors.dart';
 import 'package:foodie/ui/router.dart';
 
-// Future<void> main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(
-//     options: const FirebaseOptions(
-//         apiKey: "AIzaSyDPV7z-rpBw5IkRBUgnJdJFWykRKCtsdQA",
-//         authDomain: "foodie-960f5.firebaseapp.com",
-//         databaseURL: "https://foodie-960f5-default-rtdb.firebaseio.com",
-//         projectId: "foodie-960f5",
-//         storageBucket: "foodie-960f5.appspot.com",
-//         messagingSenderId: "888038063008",
-//         appId: "1:888038063008:web:27631104756a011800c2c5"),
-//   );
-//   runApp(const MyApp());
-// }
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
