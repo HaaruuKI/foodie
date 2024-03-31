@@ -8,5 +8,5 @@ class GetNameShoppingCart {
   static const String get_price_product = 'precio';
   static const String get_image_product = 'imagen';
   static const String get_quantity_product = 'quantity';
-  static const String get_order_product = 'order';
+  static const String get_order_product = 'orders';
 }

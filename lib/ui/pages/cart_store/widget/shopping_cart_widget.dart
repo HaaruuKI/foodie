@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/name_shopping_cart.dart';
 import 'package:foodie/domain/entities/log_in.dart';
+import 'package:foodie/domain/entities/shopping_cart/funtion_shopping_cart.dart';
 import 'package:foodie/ui/colors.dart';
 
 class ShoppingCartWidget extends StatefulWidget {
@@ -40,79 +41,6 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
 
             totalQuantity = totalQuantity.toDouble();
             totalPrice = totalPrice.toDouble();
-            Future<void> updateCartData(String key, int newQuantity) async {
-              await LogIn.databaseRef
-                  .child(GetNameShoppingCart.get_key_shopping_cart)
-                  .child(LogIn.user!.uid)
-                  .child(key)
-                  .update({
-                GetNameShoppingCart.get_quantity_product: newQuantity,
-              });
-            }
-
-            void incrementQuantity(String key) {
-              final item = items.firstWhere((item) => item['key'] == key);
-              final newQuantity =
-                  item[GetNameShoppingCart.get_quantity_product] + 1;
-              if (newQuantity > 0) {
-                updateCartData(key, newQuantity);
-              }
-            }
-
-            Future<void> deleteCartData(String key) async {
-              await LogIn.databaseRef
-                  .child(GetNameShoppingCart.get_key_shopping_cart)
-                  .child(LogIn.user!.uid)
-                  .child(key)
-                  .remove();
-            }
-
-            void decrementQuantity(String key) {
-              final item = items.firstWhere((item) => item['key'] == key);
-              final newQuantity =
-                  item[GetNameShoppingCart.get_quantity_product] - 1;
-              if (newQuantity >= 1) {
-                updateCartData(key, newQuantity);
-              } else {
-                deleteCartData(key);
-                if (totalQuantity <= 1) {
-                  Navigator.pushNamed(context, 'menu');
-                }
-              }
-            }
-
-            Future<void> deleteCart() async {
-              await LogIn.databaseRef
-                  .child(GetNameShoppingCart.get_key_shopping_cart)
-                  .child(LogIn.user!.uid)
-                  .remove();
-            }
-
-            Future<void> sendOrder() async {
-              final orderRef = LogIn.databaseRef
-                  .child(GetNameShoppingCart.get_order_product)
-                  .child(LogIn.user!.uid);
-
-              final order = {
-                "products": items.map((item) {
-                  return {
-                    "name": item['name'],
-                    "price": item['price'],
-                    "quantity": item['quantity'],
-                  };
-                }).toList(),
-                "state": "pendiente",
-                "totalPrice": totalPrice,
-                "totalQuantity": totalQuantity,
-                "timestamp": DateTime.now().microsecondsSinceEpoch,
-              };
-
-              await orderRef.push().set(order);
-
-              deleteCart();
-
-              Navigator.pop(context);
-            }
 
             for (final item in items) {
               totalQuantity += item['quantity'];
@@ -196,8 +124,9 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
                                                 const SizedBox(height: 7.0),
                                                 IconButton(
                                                   onPressed: () {
-                                                    incrementQuantity(
-                                                        item['key']);
+                                                    FuncionShoppingCart
+                                                        .IncrementQuantity(
+                                                            item['key'], items);
                                                   },
                                                   icon: const Icon(
                                                     Icons.add,
@@ -214,8 +143,12 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
                                                 ),
                                                 IconButton(
                                                   onPressed: () {
-                                                    decrementQuantity(
-                                                        item['key']);
+                                                    FuncionShoppingCart
+                                                        .DecrementQuantity(
+                                                            item['key'],
+                                                            items,
+                                                            totalQuantity,
+                                                            context);
                                                   },
                                                   icon: const Icon(
                                                     Icons.remove,
@@ -316,7 +249,11 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
                                   ),
                                 ),
                                 ElevatedButton(
-                                  onPressed: sendOrder,
+                                  onPressed: () => FuncionShoppingCart.AddOrder(
+                                      context,
+                                      items,
+                                      totalPrice,
+                                      totalQuantity),
                                   style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateColor.resolveWith(
