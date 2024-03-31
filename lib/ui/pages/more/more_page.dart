@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'package:foodie/domain/entities/popular.dart';
+import 'package:foodie/domain/entities/products/products.dart';
 import 'package:foodie/ui/pages/more/widget/more_wiget.dart';
 
 class MorePage extends StatefulWidget {

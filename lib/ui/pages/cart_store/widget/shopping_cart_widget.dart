@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:foodie/domain/entities/shopping_cart.dart';
+import 'package:foodie/domain/entities/name_shopping_cart.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/colors.dart';
 
@@ -17,7 +17,7 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: LogIn.databaseRef
-          .child(GetShoppingCart.get_name_shopping_cart)
+          .child(GetNameShoppingCart.get_key_shopping_cart)
           .child(LogIn.user!.uid)
           .onValue,
       builder: (context, snapshot) {
@@ -29,10 +29,10 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
               final product = Map<String, dynamic>.from(value as dynamic);
               items.add({
                 'key': key,
-                'name': product[GetShoppingCart.get_name_user],
-                'price': product[GetShoppingCart.get_price],
-                'img': product[GetShoppingCart.get_image],
-                'quantity': product[GetShoppingCart.get_quantity],
+                'name': product[GetNameShoppingCart.get_name_product],
+                'price': product[GetNameShoppingCart.get_price_product],
+                'img': product[GetNameShoppingCart.get_image_product],
+                'quantity': product[GetNameShoppingCart.get_quantity_product],
               });
             });
             double totalQuantity = 0;
@@ -42,17 +42,18 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
             totalPrice = totalPrice.toDouble();
             Future<void> updateCartData(String key, int newQuantity) async {
               await LogIn.databaseRef
-                  .child(GetShoppingCart.get_name_shopping_cart)
+                  .child(GetNameShoppingCart.get_key_shopping_cart)
                   .child(LogIn.user!.uid)
                   .child(key)
                   .update({
-                GetShoppingCart.get_quantity: newQuantity,
+                GetNameShoppingCart.get_quantity_product: newQuantity,
               });
             }
 
             void incrementQuantity(String key) {
               final item = items.firstWhere((item) => item['key'] == key);
-              final newQuantity = item[GetShoppingCart.get_quantity] + 1;
+              final newQuantity =
+                  item[GetNameShoppingCart.get_quantity_product] + 1;
               if (newQuantity > 0) {
                 updateCartData(key, newQuantity);
               }
@@ -60,7 +61,7 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
 
             Future<void> deleteCartData(String key) async {
               await LogIn.databaseRef
-                  .child(GetShoppingCart.get_name_shopping_cart)
+                  .child(GetNameShoppingCart.get_key_shopping_cart)
                   .child(LogIn.user!.uid)
                   .child(key)
                   .remove();
@@ -68,7 +69,8 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
 
             void decrementQuantity(String key) {
               final item = items.firstWhere((item) => item['key'] == key);
-              final newQuantity = item[GetShoppingCart.get_quantity] - 1;
+              final newQuantity =
+                  item[GetNameShoppingCart.get_quantity_product] - 1;
               if (newQuantity >= 1) {
                 updateCartData(key, newQuantity);
               } else {
@@ -81,14 +83,14 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
 
             Future<void> deleteCart() async {
               await LogIn.databaseRef
-                  .child(GetShoppingCart.get_name_shopping_cart)
+                  .child(GetNameShoppingCart.get_key_shopping_cart)
                   .child(LogIn.user!.uid)
                   .remove();
             }
 
             Future<void> sendOrder() async {
               final orderRef = LogIn.databaseRef
-                  .child(GetShoppingCart.get_order)
+                  .child(GetNameShoppingCart.get_order_product)
                   .child(LogIn.user!.uid);
 
               final order = {
@@ -157,7 +159,7 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
                                             alignment: Alignment.center,
                                             child: Image.network(
                                               item['img'] ??
-                                                  GetShoppingCart.url,
+                                                  GetNameShoppingCart.url,
                                               width: 130,
                                               height: 80,
                                             ),

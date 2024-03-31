@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/colors.dart';
 
@@ -8,11 +9,11 @@ class ShowSnackBars {
       SnackBar(
         content: Text(
           'Se agrego $nombre al carrito',
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         behavior: SnackBarBehavior.floating,
         backgroundColor: amarillo,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         width: 200,
       ),
     );

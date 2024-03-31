@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/name_log_in.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LogIn {
@@ -38,26 +39,32 @@ class LogIn {
   }
 
   Future<void> _getGoogleUserData() async {
-    final userData = await firestore.collection('Users').doc(user!.uid).get();
+    final userData = await firestore
+        .collection(GetNameLogIn.get_key_user)
+        .doc(user!.uid)
+        .get();
     if (userData.exists) {
-      userName = userData.get('name');
+      userName = userData.get(GetNameLogIn.get_name_user);
       userEmail = user!.email ?? "";
-      userLastName = userData.get('lastname');
-      userNumPhone = userData.get('numero');
-      moneyfoodie = userData.get('moneyfoodie');
+      userLastName = userData.get(GetNameLogIn.get_lastname_user);
+      userNumPhone = userData.get(GetNameLogIn.get_number_user);
+      moneyfoodie = userData.get(GetNameLogIn.get_moneyfoodie_user);
     }
     // userName = user!.displayName ?? "";
     // userEmail = user!.email ?? "";
   }
 
   Future<void> _getEmailPasswordUserData() async {
-    final userData = await firestore.collection('Users').doc(user!.uid).get();
+    final userData = await firestore
+        .collection(GetNameLogIn.get_key_user)
+        .doc(user!.uid)
+        .get();
     if (userData.exists) {
-      userName = userData.get('name');
-      userEmail = userData.get('email');
-      userLastName = userData.get('lastname');
-      userNumPhone = userData.get('numero');
-      moneyfoodie = userData.get('moneyfoodie');
+      userName = userData.get(GetNameLogIn.get_name_user);
+      userEmail = userData.get(GetNameLogIn.get_email_user);
+      userLastName = userData.get(GetNameLogIn.get_lastname_user);
+      userNumPhone = userData.get(GetNameLogIn.get_number_user);
+      moneyfoodie = userData.get(GetNameLogIn.get_moneyfoodie_user);
     }
   }
 }

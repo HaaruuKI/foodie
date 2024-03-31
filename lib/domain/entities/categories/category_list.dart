@@ -1,4 +1,4 @@
-import 'package:foodie/domain/entities/categories.dart';
+import 'package:foodie/domain/entities/categories/categories.dart';
 
 class CategoryList {
   static final List<CategoryItem> categories = [

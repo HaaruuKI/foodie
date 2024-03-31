@@ -1,9 +1,8 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 
-class BtnCategorie {
-  static Future<void> NavigateToMenuPage(
+class NavigateTo {
+  // Navigate to the menu page with arguments
+  static Future<void> MenuPageWithArguments(
       BuildContext context, String category) async {
     Navigator.pushNamed(context, 'menu_page',
         arguments: {'category': category});

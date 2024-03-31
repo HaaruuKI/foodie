@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/favorite/add_to_favorites.dart';
-import 'package:foodie/domain/entities/send_data_to_realtime.dart';
+import 'package:foodie/domain/entities/add_to_shopping_cart.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/domain/entities/snack_bar_send_data.dart';
 import 'package:foodie/ui/colors.dart';
