@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/pages/cart_store/widget/buttom_pay.dart';
-import 'package:foodie/ui/pages/cart_store/widget/price_checkout_widget.dart';
-import 'package:foodie/ui/pages/cart_store/widget/quantity_checkout_widget.dart';
+import 'package:foodie/ui/pages/cart_store/widget/price_checkout.dart';
+import 'package:foodie/ui/pages/cart_store/widget/quantity_checkout.dart';
 
 Widget CheckoutContainer(
     List items, double totalQuantity, double totalPrice, BuildContext context) {
@@ -25,60 +25,12 @@ Widget CheckoutContainer(
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Producto:',
-                  style: TextStyle(fontSize: 20),
-                ),
-                QuantityCheckoutWidget(totalQuantity),
-              ],
-            ),
-          ),
+          QuantityCheckoutWidget(totalQuantity),
           const Divider(
             color: Colors.black,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Total:',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                PriceCheckoutWidget(totalPrice),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  '',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                ButtomPay(totalPrice, totalQuantity, items, context),
-              ],
-            ),
-          ),
+          PriceCheckoutWidget(totalPrice),
+          ButtomPay(totalPrice, totalQuantity, items, context),
         ],
       ),
     ),

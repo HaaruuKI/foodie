@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/name_shopping_cart.dart';
 import 'package:foodie/ui/pages/cart_store/widget/buttom_increment_and_decrement.dart';
 import 'package:foodie/ui/pages/cart_store/widget/image_widget.dart';
-import 'package:foodie/ui/pages/cart_store/widget/text_name_product_widget.dart';
-import 'package:foodie/ui/pages/cart_store/widget/text_price_product_widget.dart';
+import 'package:foodie/ui/pages/cart_store/widget/name_product_expanded.dart';
+import 'package:foodie/ui/pages/cart_store/widget/price_product_expanded.dart';
 
 Widget ExpandedProducts(
     List items, double totalQuantity, BuildContext context) {
@@ -16,7 +16,7 @@ Widget ExpandedProducts(
         final item = items[index];
         final img_prduct = item['img'] ?? GetNameShoppingCart.url;
         final name_product = item['name'] ?? 'No hay producto';
-        final price_product = '\$${item['price'] ?? 0.toStringAsFixed(2)}';
+        final price_product = '\$${item['price'] ?? 0.00.toStringAsFixed(2)}';
 
         return ListTile(
           title: Column(
