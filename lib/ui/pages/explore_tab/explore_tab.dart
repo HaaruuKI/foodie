@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:foodie/domain/entities/log_in.dart';
-import 'package:foodie/ui/pages/categories/categories.dart';
+import 'package:foodie/ui/pages/categories/categories_page.dart';
 import 'package:foodie/ui/pages/more/more_page.dart';
 import 'package:foodie/ui/pages/popular/popular_page.dart';
 import 'package:foodie/ui/widget/btn_cart.dart';
@@ -36,7 +36,7 @@ class _ExploreTabState extends State<ExploreTab> {
           child: Column(
             children: [
               Search(),
-              Categories(),
+              CategoriesPage(),
               PopularPage(),
               MorePage(),
               SizedBox(height: 80),
