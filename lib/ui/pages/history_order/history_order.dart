@@ -67,12 +67,9 @@ class _HistoryOrderState extends State<HistoryOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: btnBack(context),
-      ),
       body: Column(
         children: [
+          BtnBack(context),
           const SizedBox(height: 30),
           Padding(
             padding: EdgeInsets.only(top: 0, left: 5, bottom: 5),

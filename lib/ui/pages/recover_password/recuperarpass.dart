@@ -21,10 +21,6 @@ class _RecoverPasswordState extends State<RecoverPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: btnBack(context),
-        ),
         body: _cargando
             ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
@@ -32,6 +28,7 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
+                      BtnBack(context),
                       const Center(
                         child: Text(
                             '¿Olvidaste tu contraseña  Google o Foodie?',

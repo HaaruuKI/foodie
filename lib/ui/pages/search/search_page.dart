@@ -19,12 +19,9 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: btnBack(context),
-      ),
       body: Column(
         children: [
+          BtnBack(context),
           Padding(
             padding: EdgeInsets.symmetric(
               vertical: 30,

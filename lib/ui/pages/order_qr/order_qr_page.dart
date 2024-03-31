@@ -30,14 +30,11 @@ class _OrderQRPageState extends State<OrderQRPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: btnBack(context),
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
+              BtnBack(context),
               Text(
                 'QR',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),

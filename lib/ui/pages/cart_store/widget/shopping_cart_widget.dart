@@ -5,6 +5,7 @@ import 'package:foodie/domain/entities/name_shopping_cart.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/pages/cart_store/widget/checkout_container.dart';
 import 'package:foodie/ui/pages/cart_store/widget/expanded_container.dart';
+import 'package:foodie/ui/widget/btn_back.dart';
 
 class ShoppingCartWidget extends StatefulWidget {
   const ShoppingCartWidget({super.key});
@@ -48,6 +49,7 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
             }
             return Column(
               children: [
+                BtnBack(context),
                 ExpandedProducts(items, totalQuantity, context),
                 CheckoutContainer(items, totalQuantity, totalPrice, context),
               ],

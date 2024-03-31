@@ -34,12 +34,9 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: btnBack(context),
-      ),
       body: Column(
         children: [
+          BtnBack(context),
           Text(
             category!.toUpperCase(),
             style: const TextStyle(

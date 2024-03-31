@@ -79,15 +79,11 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: btnBack(context),
-        title: const Text('Perfil'),
-      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            BtnBack(context),
             const Text(
               'Actualizar informacion',
               style: TextStyle(fontSize: 18.0),
