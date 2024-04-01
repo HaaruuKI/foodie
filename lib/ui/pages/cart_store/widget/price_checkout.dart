@@ -18,6 +18,9 @@ Widget PriceCheckoutWidget(double totalPrice) {
             fontWeight: FontWeight.bold,
           ),
         ),
+        const SizedBox(
+          width: 15,
+        ),
         Text(
           '\$${totalPrice.toStringAsFixed(2)}',
           style: const TextStyle(
