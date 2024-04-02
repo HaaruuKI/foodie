@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/colors.dart';
 
-class ShowSnackBars {
+class FuntionShowSnackBar {
   static Future<void> ShowSnackbar(BuildContext context, String nombre) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

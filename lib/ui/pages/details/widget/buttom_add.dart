@@ -11,8 +11,8 @@ Widget ButtomAdd(String? name, int? price, String? img, BuildContext context) {
   return ElevatedButton.icon(
     onPressed: () {
       if (LogIn.user != null) {
-        SendDataToRealtime.EnviarDatosRealtimeDatabase(name!, price!, img!);
-        ShowSnackBars.ShowSnackbar(context, name);
+        FuntionShoppingCart.EnviarDatosRealtimeDatabase(name!, price!, img!);
+        FuntionShowSnackBar.ShowSnackbar(context, name);
       } else {
         Navigator.pushNamed(context, 'profile');
       }

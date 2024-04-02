@@ -3,7 +3,7 @@
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/domain/entities/name_shopping_cart.dart';
 
-class SendDataToRealtime {
+class FuntionShoppingCart {
   static Future<void> EnviarDatosRealtimeDatabase(
       String name, int price, String imgUrl) async {
     final userRef = LogIn.databaseRef

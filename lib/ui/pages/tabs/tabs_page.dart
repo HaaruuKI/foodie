@@ -2,7 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/pages/explore_tab/explore_tab.dart';
-import 'package:foodie/ui/pages/favorites/fav_tab.dart';
+import 'package:foodie/ui/pages/favorites/favorite_page.dart';
 import 'package:foodie/ui/pages/order/order_tab.dart';
 import 'package:foodie/ui/pages/profile/profile_tab.dart';
 //Importando las 'Pages' tab.
@@ -19,7 +19,7 @@ class _TabsPageState extends State<TabsPage> {
   final List<Widget> _widgetOptions = [
     const ExploreTab(),
     const Order(),
-    const Favorites(),
+    const FavoritePage(),
     const ProfileUser(),
     // Pay(),
   ];

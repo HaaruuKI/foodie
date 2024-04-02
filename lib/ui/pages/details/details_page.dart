@@ -47,7 +47,9 @@ class _DetailsPageState extends State<DetailsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: ContainerBar(name!, price!, img!, context),
+      bottomNavigationBar: LogIn.user != null
+          ? ContainerBar(name!, price!, img!, context)
+          : null,
     );
   }
 }

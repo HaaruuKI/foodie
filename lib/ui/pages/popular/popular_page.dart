@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/details/funtion_details.dart';
 import 'package:foodie/domain/entities/products/products.dart';
 import 'package:foodie/ui/pages/popular/widget/popular_widget.dart';
 
@@ -21,18 +22,15 @@ class _PopularPageState extends State<PopularPage> {
       final name = product.name;
       final price = product.price;
       final img = product.img;
+      final description = product.descripcion;
 
       return PopularesItem(
         name: name,
         price: price,
         img: img,
         onTap: () {
-          Navigator.pushNamed(context, 'details', arguments: {
-            'name': name,
-            'price': price,
-            'img': img,
-            'des': product.descripcion,
-          });
+          FuntionDetails.NavegeteDetails(
+              context, name, price, img, description);
         },
       );
     }).toList();

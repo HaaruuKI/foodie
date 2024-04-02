@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:foodie/domain/entities/favorite/add_to_favorites.dart';
+import 'package:foodie/domain/entities/favorite/funtion_favorite.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/domain/entities/add_to_shopping_cart.dart';
 import 'package:foodie/domain/entities/snack_bar_send_data.dart';
@@ -167,8 +167,8 @@ class _MenuPageState extends State<MenuPage> {
                                       IconButton(
                                         onPressed: () {
                                           if (LogIn.user != null) {
-                                            AgregarFavoritos.AddToFavorite(
-                                                context, name, price, img_url);
+                                            FuncionFavorites.AddToFavorite(
+                                                name, price, img_url);
                                             print('usuario registrado');
                                           } else {
                                             print('usuario no registrado');
@@ -183,10 +183,10 @@ class _MenuPageState extends State<MenuPage> {
                                       IconButton(
                                         onPressed: () {
                                           if (LogIn.user != null) {
-                                            SendDataToRealtime
+                                            FuntionShoppingCart
                                                 .EnviarDatosRealtimeDatabase(
                                                     name, price, img_url);
-                                            ShowSnackBars.ShowSnackbar(
+                                            FuntionShowSnackBar.ShowSnackbar(
                                                 context, name);
                                             print('usuario registrado');
                                           } else {

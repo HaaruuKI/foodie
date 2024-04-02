@@ -7,4 +7,9 @@ class NavigateTo {
     Navigator.pushNamed(context, 'menu_page',
         arguments: {'category': category});
   }
+
+  // Navigate to the profile
+  static Future<void> Profile(BuildContext context) async {
+    Navigator.pushNamed(context, 'profile');
+  }
 }

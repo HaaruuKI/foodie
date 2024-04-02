@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodie/domain/entities/favorite/add_to_favorites.dart';
+import 'package:foodie/domain/entities/favorite/funtion_favorite.dart';
 import 'package:foodie/domain/entities/add_to_shopping_cart.dart';
 import 'package:foodie/domain/entities/log_in.dart';
+import 'package:foodie/domain/entities/navigator/navigate_to.dart';
 import 'package:foodie/domain/entities/snack_bar_send_data.dart';
 import 'package:foodie/ui/colors.dart';
 
@@ -29,7 +30,7 @@ class _PopularesItemState extends State<PopularesItem> {
   @override
   void initState() {
     super.initState();
-    LogIn().GetCurrentUser(context); // Call GetCurrentUser with context
+    LogIn().GetCurrentUser(context);
   }
 
   @override
@@ -90,10 +91,11 @@ class _PopularesItemState extends State<PopularesItem> {
                           color: amarillo, size: 26),
                       onPressed: () {
                         if (LogIn.user != null) {
-                          AgregarFavoritos.AddToFavorite(
-                              context, widget.name, widget.price, widget.img);
+                          FuncionFavorites.AddToFavorite(
+                              widget.name, widget.price, widget.img);
                           print('usuario registrado');
                         } else {
+                          NavigateTo.Profile(context);
                           print('usuario no registrado');
                         }
                       },
@@ -103,11 +105,13 @@ class _PopularesItemState extends State<PopularesItem> {
                           color: amarillo, size: 26),
                       onPressed: () {
                         if (LogIn.user != null) {
-                          ShowSnackBars.ShowSnackbar(context, widget.name);
-                          SendDataToRealtime.EnviarDatosRealtimeDatabase(
+                          FuntionShowSnackBar.ShowSnackbar(
+                              context, widget.name);
+                          FuntionShoppingCart.EnviarDatosRealtimeDatabase(
                               widget.name, widget.price, widget.img);
                           print('usuario registrado');
                         } else {
+                          NavigateTo.Profile(context);
                           print('usuario no registrado');
                         }
                       },
