@@ -6,7 +6,8 @@ import 'package:foodie/domain/entities/name_shopping_cart.dart';
 import 'package:foodie/ui/pages/cart_store/widget/price_checkout.dart';
 import 'package:foodie/ui/pages/details/widget/buttom_add.dart';
 
-Widget BottomBar(String? name, int? price, String? img, BuildContext context) {
+Widget ContainerBar(
+    String? name, int? price, String? img, BuildContext context) {
   return BottomAppBar(
     child: StreamBuilder(
       stream: LogIn.databaseRef

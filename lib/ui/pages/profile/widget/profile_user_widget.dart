@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/button.dart';
-// import 'package:foodie/ui/colors.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -36,16 +35,6 @@ class _ProfileState extends State<Profile> {
           ],
         ),
       const SizedBox(height: 30),
-      // const Text(
-      //   'Creditos foodie:',
-      //   style: TextStyle(
-      //       fontSize: 25.0, fontWeight: FontWeight.bold, color: amarillo),
-      // ),
-      // Text(
-      //   '${credits!.toStringAsFixed(2)}',
-      //   style: const TextStyle(
-      //       fontSize: 25.0, fontWeight: FontWeight.bold, color: amarillo),
-      // ),
       const SizedBox(height: 30),
       TextButton(
         onPressed: () => Navigator.pushNamed(context, 'settings'),

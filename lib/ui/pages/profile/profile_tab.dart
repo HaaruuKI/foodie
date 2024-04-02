@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/pages/profile/widget/profile_user_widget.dart';
 import 'package:foodie/ui/pages/profile/widget/profile_user_widget_guest.dart';
+import 'package:foodie/ui/widget/money_foodie.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileUser extends StatefulWidget {
@@ -23,12 +24,13 @@ class _ProfileUserState extends State<ProfileUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Perfil'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Perfil'),
+      // ),
       body: Center(
         child: Column(
           children: [
+            const MoneyFoodie(),
             const SizedBox(height: 30),
             if (LogIn.user != null)
               const Profile()

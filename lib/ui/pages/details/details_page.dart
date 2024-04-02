@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/pages/details/widget/arc_widget.dart';
-import 'package:foodie/ui/pages/details/widget/button_bar.dart';
+import 'package:foodie/ui/pages/details/widget/container_bar.dart';
 import 'package:foodie/ui/pages/details/widget/image_widget.dart';
 import 'package:foodie/ui/widget/btn_back.dart';
 
@@ -47,7 +47,7 @@ class _DetailsPageState extends State<DetailsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(name!, price!, img!, context),
+      bottomNavigationBar: ContainerBar(name!, price!, img!, context),
     );
   }
 }
