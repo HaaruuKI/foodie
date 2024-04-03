@@ -1,14 +1,10 @@
 // ignore_for_file: file_names, use_key_in_widget_constructors, prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, library_private_types_in_public_api, use_build_context_synchronously
 
-import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/colors.dart';
 
-// ... (import statements y otras declaraciones)
 class Order extends StatefulWidget {
   const Order({super.key});
 

@@ -30,7 +30,7 @@ class _PopularesItemState extends State<PopularesItem> {
   @override
   void initState() {
     super.initState();
-    LogIn().GetCurrentUser(context);
+    LogIn().GetCurrentUser();
   }
 
   @override

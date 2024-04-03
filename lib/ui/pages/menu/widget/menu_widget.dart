@@ -21,7 +21,7 @@ class _MenuWidgetState extends State<MenuWidget> {
   @override
   void initState() {
     super.initState();
-    LogIn().GetCurrentUser(context); // Call GetCurrentUser with context
+    LogIn().GetCurrentUser(); // Call GetCurrentUser with context
   }
 
   @override
