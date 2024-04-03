@@ -26,7 +26,7 @@ final routes = <String, WidgetBuilder>{
   'menu': (BuildContext context) => const TabsPage(),
 
   // login
-  'login': (BuildContext context) => const LoginPage(),
+  'login': (BuildContext context) => LoginPage(),
   // register
   'register': (BuildContext context) => const SignUp(),
   // cart
