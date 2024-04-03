@@ -12,7 +12,9 @@ Widget containerWidget(
     TextEditingController emailController,
     TextEditingController passwordController,
     bool cargando,
-    Function funtionCargar) {
+    Function funtionCargar,
+    Function funtionPasswordVisible,
+    bool passwordVisible) {
   return Transform.translate(
     offset: const Offset(0.0, -50.0),
     child: Container(
@@ -29,7 +31,8 @@ Widget containerWidget(
               textBienvenida(),
               const SizedBox(height: 40),
               emailInput(emailController),
-              passwordInput(passwordController),
+              passwordInput(passwordController, funtionPasswordVisible,
+                  passwordVisible, context),
               const SizedBox(height: 16.0),
               buttonLogin(emailController, passwordController, cargando,
                   context, formKey, funtionCargar),

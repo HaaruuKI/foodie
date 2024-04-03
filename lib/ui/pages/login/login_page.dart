@@ -16,6 +16,13 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool passwordVisible = false;
+  void funtionPasswordVisible() {
+    setState(() {
+      passwordVisible = !passwordVisible;
+    });
+  }
+
   bool cargando = false;
   void funtionCargar() {
     setState(() {
@@ -33,8 +40,15 @@ class _LoginPageState extends State<LoginPage> {
               child: ListView(
                 children: [
                   imageWidget(context),
-                  containerWidget(context, formKey, emailController,
-                      passwordController, cargando, funtionCargar)
+                  containerWidget(
+                      context,
+                      formKey,
+                      emailController,
+                      passwordController,
+                      cargando,
+                      funtionCargar,
+                      funtionPasswordVisible,
+                      passwordVisible),
                 ],
               ),
             ),
