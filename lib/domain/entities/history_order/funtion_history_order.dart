@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:foodie/domain/entities/history_order/name_history_order.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 

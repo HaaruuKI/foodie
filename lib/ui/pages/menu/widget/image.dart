@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/name_shopping_cart.dart';
 
 Widget image(
-    BuildContext context, String name, int price, String img, String des) {
+    BuildContext context, String name, int price, String? img, String des) {
   return InkWell(
     onTap: () {
       Navigator.pushNamed(context, 'details', arguments: {
@@ -17,7 +18,7 @@ Widget image(
       height: 120,
       width: 120,
       child: CachedNetworkImage(
-        imageUrl: img,
+        imageUrl: img ?? GetNameShoppingCart.url,
         placeholder: (context, url) => const CircularProgressIndicator(),
         errorWidget: (context, url, error) => const Icon(Icons.error),
       ),

@@ -29,7 +29,6 @@ Widget expandedContainer(String? category) {
                 final int price = product?['price'];
                 final String img = product?['img_url'];
                 final String des = product?['description'];
-                // final String status = product?['status'];
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),

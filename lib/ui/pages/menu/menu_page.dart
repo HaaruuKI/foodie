@@ -20,8 +20,8 @@ class _MenuPageState extends State<MenuPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final args = ModalRoute.of(context)!.settings.arguments as Map;
-    category = args['category'];
+    final args = ModalRoute.of(context)!.settings.arguments as Map?;
+    category = args?['category'] ?? 'No hay producto';
   }
 
   @override
