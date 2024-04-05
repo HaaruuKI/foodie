@@ -31,7 +31,7 @@ class _HistoryOrderState extends State<HistoryOrder> {
             }
             return Column(
               children: [
-                BtnBack(context),
+                btnBack(context),
                 const SizedBox(height: 30),
                 Padding(
                   padding: EdgeInsets.only(top: 0, left: 5, bottom: 5),

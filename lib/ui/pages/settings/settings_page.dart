@@ -83,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            BtnBack(context),
+            btnBack(context),
             const Text(
               'Actualizar informacion',
               style: TextStyle(fontSize: 18.0),

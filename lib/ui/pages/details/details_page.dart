@@ -41,7 +41,7 @@ class _DetailsPageState extends State<DetailsPage> {
         padding: EdgeInsets.only(top: 5),
         child: ListView(
           children: [
-            BtnBack(context),
+            btnBack(context),
             ImageWidget(img),
             ArcWidget(price, name, des),
           ],

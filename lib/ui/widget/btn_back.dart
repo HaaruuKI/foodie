@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //Creando un boton de retroceso
-Widget BtnBack(BuildContext context) {
+Widget btnBack(BuildContext context) {
   return AppBar(
     backgroundColor: Colors.white,
     leading: IconButton(

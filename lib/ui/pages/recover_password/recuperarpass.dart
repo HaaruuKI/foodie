@@ -28,7 +28,7 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      BtnBack(context),
+                      btnBack(context),
                       const Center(
                         child: Text(
                             '¿Olvidaste tu contraseña  Google o Foodie?',

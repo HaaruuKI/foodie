@@ -3,7 +3,7 @@ import 'package:foodie/ui/pages/cart_store/shopping_cart_page.dart';
 import 'package:foodie/ui/pages/details/details_page.dart';
 import 'package:foodie/ui/pages/history_order/history_order.dart';
 import 'package:foodie/ui/pages/login/login_page.dart';
-import 'package:foodie/ui/pages/menu/menu.dart';
+import 'package:foodie/ui/pages/menu/menu_page.dart';
 import 'package:foodie/ui/pages/order_qr/order_qr_page.dart';
 import 'package:foodie/ui/pages/profile/profile_tab.dart';
 import 'package:foodie/ui/pages/recover_password/recuperarpass.dart';

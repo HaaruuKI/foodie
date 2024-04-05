@@ -49,7 +49,7 @@ class _CartWidgetState extends State<ShoppingCartWidget> {
             }
             return Column(
               children: [
-                BtnBack(context),
+                btnBack(context),
                 ExpandedProducts(items, totalQuantity, context),
                 CheckoutContainer(items, totalQuantity, totalPrice, context),
               ],

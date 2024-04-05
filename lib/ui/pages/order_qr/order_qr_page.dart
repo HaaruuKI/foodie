@@ -34,7 +34,7 @@ class _OrderQRPageState extends State<OrderQRPage> {
         child: Center(
           child: Column(
             children: [
-              BtnBack(context),
+              btnBack(context),
               Text(
                 'QR',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
