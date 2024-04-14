@@ -12,7 +12,7 @@ Widget ButtomAdd(String? name, int? price, String? img, BuildContext context) {
     onPressed: () {
       if (LogIn.user != null) {
         FuntionShoppingCart.EnviarDatosRealtimeDatabase(name!, price!, img!);
-        FuntionShowSnackBar.ShowSnackbar(context, name);
+        FuntionShowSnackBar.showSentText(context, name);
       } else {
         Navigator.pushNamed(context, 'profile');
       }

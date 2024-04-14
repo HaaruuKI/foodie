@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:foodie/ui/pages/cart_store/widget/buttom_pay.dart';
 import 'package:foodie/ui/pages/cart_store/widget/price_checkout.dart';
 import 'package:foodie/ui/pages/cart_store/widget/quantity_checkout.dart';
+import 'package:foodie/ui/widget/button_pay_widget.dart';
 
-Widget CheckoutContainer(
-    List items, double totalQuantity, double totalPrice, BuildContext context) {
+Widget checkoutContainer(
+    List items, int totalQuantity, int totalPrice, BuildContext context) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
     child: Container(
@@ -30,7 +30,15 @@ Widget CheckoutContainer(
             color: Colors.black,
           ),
           PriceCheckoutWidget(totalPrice),
-          ButtomPay(totalPrice, totalQuantity, items, context),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child:
+                    buttonPayWidget(totalPrice, totalQuantity, items, context),
+              ),
+            ],
+          ),
         ],
       ),
     ),

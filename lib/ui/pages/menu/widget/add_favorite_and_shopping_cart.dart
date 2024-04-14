@@ -32,7 +32,7 @@ Widget addFavoriteAndShoppingCart(
           onPressed: () {
             if (LogIn.user != null) {
               FuntionShoppingCart.EnviarDatosRealtimeDatabase(name, price, img);
-              FuntionShowSnackBar.ShowSnackbar(context, name);
+              FuntionShowSnackBar.showSentText(context, name);
               print('usuario registrado');
             } else {
               print('usuario no registrado');

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:foodie/ui/colors.dart';
 
 class FuntionShowSnackBar {
-  static Future<void> ShowSnackbar(BuildContext context, String nombre) async {
+  static Future<void> showSentText(BuildContext context, String name) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Se agrego $nombre al carrito',
+          'Se agrego $name al carrito',
           style: const TextStyle(color: Colors.white),
         ),
         behavior: SnackBarBehavior.floating,

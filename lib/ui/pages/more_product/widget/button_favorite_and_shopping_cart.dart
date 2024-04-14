@@ -2,17 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/add_to_shopping_cart.dart';
 import 'package:foodie/domain/entities/favorite/funtion_favorite.dart';
+import 'package:foodie/domain/entities/log_in.dart';
+import 'package:foodie/domain/entities/navigator/navigate_to.dart';
 import 'package:foodie/domain/entities/snack_bar_send_data.dart';
 import 'package:foodie/ui/colors.dart';
 
-Widget ButtomAddAndFavorite(String name, int price, String img,
-    BuildContext context, Map<String, dynamic> item) {
+Widget buttonFavoriteAndShoppingCart(
+    String name, int price, String img, BuildContext context) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       IconButton(
         onPressed: () {
-          FuncionFavorites.DeleteItem(item['key']);
+          if (LogIn.user != null) {
+            FuncionFavorites.AddToFavorite(name, price, img);
+          } else {
+            NavigateTo.Profile(context);
+          }
         },
         icon: const Icon(
           Icons.favorite_border,
@@ -22,8 +28,12 @@ Widget ButtomAddAndFavorite(String name, int price, String img,
       ),
       IconButton(
         onPressed: () {
-          FuntionShoppingCart.EnviarDatosRealtimeDatabase(name, price, img);
-          FuntionShowSnackBar.showSentText(context, name);
+          if (LogIn.user != null) {
+            FuntionShoppingCart.EnviarDatosRealtimeDatabase(name, price, img);
+            FuntionShowSnackBar.showSentText(context, name);
+          } else {
+            NavigateTo.Profile(context);
+          }
         },
         icon: const Icon(
           CupertinoIcons.cart,

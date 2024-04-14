@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/details/funtion_details.dart';
 import 'package:foodie/domain/entities/products/products.dart';
-import 'package:foodie/ui/pages/popular/widget/popular_widget.dart';
+import 'package:foodie/ui/pages/popular_product/widget/popular_widget.dart';
 
 class PopularPage extends StatefulWidget {
   const PopularPage({super.key});
@@ -16,7 +16,7 @@ class _PopularPageState extends State<PopularPage> {
   Future<List<PopularesItem>> _getPopularItems() async {
     ProductService productService = ProductService();
     List<Product> products =
-        await productService.getProducts(limit: 6, ordeBy: 'price');
+        await productService.getProducts(limit: 10, ordeBy: 'price');
 
     return products.map((product) {
       final name = product.name;

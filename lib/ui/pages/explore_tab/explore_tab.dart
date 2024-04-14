@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:foodie/ui/pages/categories/categories_page.dart';
-import 'package:foodie/ui/pages/more/more_page.dart';
-import 'package:foodie/ui/pages/popular/popular_page.dart';
+import 'package:foodie/ui/pages/more_product/more_page.dart';
+import 'package:foodie/ui/pages/popular_product/popular_page.dart';
 import 'package:foodie/ui/widget/btn_cart.dart';
 import 'package:foodie/ui/widget/search.dart';
 

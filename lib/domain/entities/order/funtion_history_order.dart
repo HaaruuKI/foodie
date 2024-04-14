@@ -3,7 +3,7 @@
 import 'package:foodie/domain/entities/history_order/name_history_order.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 
-class FuntionGetHOrder {
+class FuntionGetOrder {
   static Stream<List<Map<String, dynamic>>> GetOrdersData(double totalPrice) {
     final ordersRef = LogIn.databaseRef
         .child(GetNameHistoryOrder.get_key_order)

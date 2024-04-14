@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/log_in.dart';
@@ -32,12 +32,12 @@ Widget ContainerBar(
             double totalQuantity = 0;
             double totalPrice = 0;
 
-            totalQuantity = totalQuantity.toDouble();
-            totalPrice = totalPrice.toDouble();
-
             for (final item in items) {
-              totalQuantity += item['quantity'];
-              totalPrice += item['price'] * item['quantity'];
+              int itemQuiantity = item['quantity'];
+              int itemPrice = item['price'];
+
+              totalQuantity += itemQuiantity;
+              totalPrice += itemPrice * itemQuiantity;
             }
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -47,7 +47,7 @@ Widget ContainerBar(
                   children: [
                     Row(
                       children: [
-                        PriceCheckoutWidget(totalPrice),
+                        PriceCheckoutWidget(totalPrice as int),
                       ],
                     ),
                     ButtomAdd(name, price, img, context)
@@ -63,7 +63,7 @@ Widget ContainerBar(
             children: [
               Row(
                 children: [
-                  PriceCheckoutWidget(0.00),
+                  PriceCheckoutWidget(0.00 as int),
                 ],
               ),
               ButtomAdd(name, price, img, context)

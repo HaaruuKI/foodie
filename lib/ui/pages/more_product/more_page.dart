@@ -1,8 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/details/funtion_details.dart';
 import 'package:foodie/domain/entities/products/products.dart';
-import 'package:foodie/ui/pages/more/widget/more_wiget.dart';
+import 'package:foodie/ui/pages/more_product/widget/more_wiget.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({super.key});
@@ -21,18 +22,15 @@ class _MorePageState extends State<MorePage> {
       final name = product.name;
       final price = product.price;
       final img = product.img;
+      final description = product.descripcion;
 
       return MoreWidget(
         name: name,
         price: price,
         img: img,
         onTap: () {
-          Navigator.pushNamed(context, 'details', arguments: {
-            'name': name,
-            'price': price,
-            'img': img,
-            'des': product.descripcion,
-          });
+          FuntionDetails.NavegeteDetails(
+              context, name, price, img, description);
         },
       );
     }).toList();

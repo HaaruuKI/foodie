@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-Widget QuantityCheckoutWidget(double totalQuantity) {
+Widget QuantityCheckoutWidget(int totalQuantity) {
   return Padding(
     padding: const EdgeInsets.symmetric(
       vertical: 10,

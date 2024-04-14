@@ -30,7 +30,7 @@ final routes = <String, WidgetBuilder>{
   // register
   'register': (BuildContext context) => const SignUp(),
   // cart
-  'cartPage': (BuildContext context) => CartPage(),
+  'cartPage': (BuildContext context) => ShoppingCartPage(),
   // Search
   'search': (BuildContext context) => const SearchPage(),
   // details

@@ -1,9 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:foodie/ui/colors.dart';
+import 'package:foodie/ui/widget/price_checkout.dart';
 
-Widget PriceCheckoutWidget(double totalPrice) {
+Widget PriceCheckoutWidget(int totalPrice) {
   return Padding(
     padding: const EdgeInsets.symmetric(
       vertical: 10,
@@ -21,14 +21,7 @@ Widget PriceCheckoutWidget(double totalPrice) {
         const SizedBox(
           width: 15,
         ),
-        Text(
-          '\$${totalPrice.toStringAsFixed(2)}',
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: amarillo,
-          ),
-        ),
+        priceCheckout(totalPrice),
       ],
     ),
   );

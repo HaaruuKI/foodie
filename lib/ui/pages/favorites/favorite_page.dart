@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/favorite/name_favorite.dart';
 import 'package:foodie/domain/entities/log_in.dart';
-import 'package:foodie/ui/pages/cart_store/widget/image_widget.dart';
 import 'package:foodie/ui/pages/favorites/widget/buttom_add_and_favorite.dart';
 import 'package:foodie/ui/pages/favorites/widget/expanded_widget.dart';
+import 'package:foodie/ui/widget/image_widget.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -82,8 +82,8 @@ class _FavoritePageState extends State<FavoritePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      ImageWidget(img),
-                                      ExpandedWidget(name, price),
+                                      imageWidget(img),
+                                      expandedWidget(name, price),
                                       ButtomAddAndFavorite(
                                           name, price, img, context, item),
                                     ],

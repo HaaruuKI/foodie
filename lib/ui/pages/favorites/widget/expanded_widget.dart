@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/ui/colors.dart';
+import 'package:foodie/ui/widget/name_widget.dart';
+import 'package:foodie/ui/widget/price_widget.dart';
 
-Widget ExpandedWidget(String name, int price) {
+Widget expandedWidget(String name, int price) {
   return Expanded(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -9,18 +10,8 @@ Widget ExpandedWidget(String name, int price) {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            name,
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            "\$${price.toStringAsFixed(2)}",
-            style: const TextStyle(
-              fontSize: 20,
-              color: amarillo,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          nameWidget(name),
+          priceWidget(price),
         ],
       ),
     ),

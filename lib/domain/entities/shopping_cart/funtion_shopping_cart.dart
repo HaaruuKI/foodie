@@ -1,8 +1,10 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/domain/entities/name_shopping_cart.dart';
+import 'package:uuid/uuid.dart';
 
 class FuncionShoppingCart {
   static Future<void> UpdateCartData(String key, int newQuantity) async {
@@ -31,8 +33,8 @@ class FuncionShoppingCart {
     }
   }
 
-  static Future<void> DecrementQuantity(String key, List items,
-      double totalQuantity, BuildContext context) async {
+  static Future<void> DecrementQuantity(
+      String key, List items, int totalQuantity, BuildContext context) async {
     final item = items.firstWhere((item) => item['key'] == key);
     final newQuantity = item[GetNameShoppingCart.get_quantity_product] - 1;
     if (newQuantity >= 1) {
@@ -52,13 +54,12 @@ class FuncionShoppingCart {
         .remove();
   }
 
-  static Future<void> AddOrder(BuildContext context, List items,
-      double totalPrice, double totalQuantity) async {
-    final orderRef = LogIn.databaseRef
-        .child(GetNameShoppingCart.get_order_product)
-        .child(LogIn.user!.uid);
+  static Future<void> AddOrder(BuildContext context, List items, int totalPrice,
+      int totalQuantity) async {
+    final uuid = Uuid().v4(); // Generate a new UUID for each order
 
-    final order = {
+    Map<String, dynamic> order = {
+      'key': uuid,
       "products": items.map((item) {
         return {
           "name": item['name'],
@@ -71,11 +72,41 @@ class FuncionShoppingCart {
       "totalQuantity": totalQuantity,
       "timestamp": DateTime.now().microsecondsSinceEpoch,
     };
+    print('uuid addOrder: $uuid');
 
-    await orderRef.push().set(order);
+    DocumentReference<Map<String, dynamic>> docDataSend =
+        FirebaseFirestore.instance.collection('orders').doc(LogIn.user!.uid);
 
+    await docDataSend.set({uuid.toString(): order}, SetOptions(merge: true));
+    addOrderForAdmin(context, items, totalPrice, totalQuantity, uuid);
     await DeleteShoppingCart();
-    // ignore: use_build_context_synchronously
     Navigator.pop(context);
+  }
+
+  static Future<void> addOrderForAdmin(BuildContext context, List items,
+      int totalPrice, int totalQuantity, String orderId) async {
+    Map<String, dynamic> order = {
+      "user": LogIn.user!.uid,
+      "products_list": items.map((item) {
+        return {
+          "name": item['name'],
+          "price": item['price'],
+          "quantity": item['quantity'],
+        };
+      }).toList(),
+      "uuid": orderId,
+      "name_user": LogIn.userName,
+      "state": "pendiente",
+      "totalPrice": totalPrice,
+      "totalQuantity": totalQuantity,
+      "timestamp": DateTime.now().microsecondsSinceEpoch,
+    };
+    // print('uuid addOrderForAdmin: $orderId');
+    DocumentReference<Map<String, dynamic>> docDataSend = FirebaseFirestore
+        .instance
+        .collection('orders_for_admin')
+        .doc('productos');
+
+    await docDataSend.set({orderId: order}, SetOptions(merge: true));
   }
 }
