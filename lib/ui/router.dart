@@ -5,6 +5,7 @@ import 'package:foodie/ui/pages/history_order/history_order_page.dart';
 import 'package:foodie/ui/pages/login/login_page.dart';
 import 'package:foodie/ui/pages/menu/menu_page.dart';
 import 'package:foodie/ui/pages/order_qr/order_qr_page.dart';
+import 'package:foodie/ui/pages/pay/pay.dart';
 import 'package:foodie/ui/pages/profile/profile_tab.dart';
 import 'package:foodie/ui/pages/recover_password/recuperarpass.dart';
 import 'package:foodie/ui/pages/register/sing_up.dart';
@@ -47,4 +48,5 @@ final routes = <String, WidgetBuilder>{
   'settings': (context) => const SettingsPage(),
   // register google
   'registerGoogle': (context) => const RegisterGooglePage(),
+  'pay': (context) => PayPage(),
 };
