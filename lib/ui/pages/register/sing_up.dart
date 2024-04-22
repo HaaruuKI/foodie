@@ -7,7 +7,7 @@ import 'package:foodie/ui/button.dart';
 import 'package:foodie/ui/colors.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key});
+  const SignUp({super.key});
 
   @override
   State<SignUp> createState() => _SignUpState();

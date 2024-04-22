@@ -13,7 +13,7 @@ class CategoriesPage extends StatelessWidget {
         child: Column(
           children: [
             const Text(
-              'Categorias',
+              'Categoria',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 26),
