@@ -1,9 +1,10 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously
+// ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously, camel_case_types
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/recover_password/function_recover_password.dart';
 import 'package:foodie/ui/button.dart';
 import 'package:foodie/ui/colors.dart';
+import 'package:foodie/ui/pages/recover_password/widget/textfield_email.dart';
 import 'package:foodie/ui/widget/btn_back.dart';
 
 class RecoverPassword extends StatefulWidget {
@@ -14,19 +15,33 @@ class RecoverPassword extends StatefulWidget {
 }
 
 class _RecoverPasswordState extends State<RecoverPassword> {
-  final _emailController = TextEditingController();
+  final emailController = TextEditingController();
 
-  final bool _cargando = false;
+  bool cargando = false;
+
+  void cargandoTrue() {
+    setState(() {
+      cargando = true;
+    });
+  }
+
+  void cargandoFalse() {
+    setState(() {
+      cargando = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _cargando
-            ? const Center(child: CircularProgressIndicator())
-            : SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+      body: cargando
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       btnBack(context),
                       const Center(
@@ -48,91 +63,25 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17.0)),
                       ),
-                      _emailInput(_emailController),
+                      textfieldEmail(emailController: emailController),
                       const SizedBox(height: 40),
                       ElevatedButton(
                         style: buttonPrimary,
                         onPressed: () async {
-                          _verificarDatos(
-                              context, _emailController, _cargando, setState);
+                          FunctionRecoverPassword.verificarDatos(
+                              context,
+                              emailController,
+                              cargando,
+                              cargandoTrue,
+                              cargandoFalse);
                         },
                         child: const Text('Recuperar contraseña'),
                       ),
                     ],
                   ),
                 ),
-              ));
+              ),
+            ),
+    );
   }
-}
-
-void _verificarDatos(
-    BuildContext context,
-    TextEditingController _emailController,
-    bool _cargando,
-    Function setState) async {
-  if (_emailController.text.isNotEmpty) {
-    setState(() {
-      _cargando = true;
-    });
-
-    try {
-      // Enviar correo electrónico para recuperar la contraseña
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text);
-
-      // Mostrar mensaje de éxito
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-              'Se ha enviado un correo electrónico para recuperar la contraseña')));
-
-      // Redirigir al usuario a la pantalla de inicio de sesión
-      Navigator.pushNamed(context, 'login');
-    } on FirebaseAuthException catch (e) {
-      // Mostrar mensaje de error
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message!)));
-    } finally {
-      setState(() {
-        _cargando = false;
-      });
-    }
-  }
-}
-
-//Crear entrada para el email
-Widget _emailInput(TextEditingController _emailController) {
-  return Container(
-    margin: const EdgeInsets.only(top: 40.0),
-    padding: const EdgeInsets.only(left: 20.0),
-    decoration: BoxDecoration(
-        color: const Color.fromRGBO(142, 142, 147, 1.2),
-        borderRadius: BorderRadius.circular(30.0)),
-    child: TextFormField(
-      controller: _emailController,
-      keyboardType: TextInputType.emailAddress,
-      decoration: const InputDecoration(
-          hintText: 'Email',
-          border: OutlineInputBorder(borderSide: BorderSide.none)),
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'El email no puede estar vacío';
-        }
-        return null;
-      },
-    ),
-  );
-}
-
-//Boton con icono de flecha de retroceso
-Widget _btnBack(BuildContext context, Color color) {
-  return IconButton(
-    icon: Icon(
-      Icons.arrow_back_rounded,
-      color: color,
-      size: 50.0,
-    ),
-    onPressed: () {
-      Navigator.pushNamed(context, 'GoogleOrFoodie');
-    },
-  );
 }

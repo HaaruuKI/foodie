@@ -8,7 +8,7 @@ import 'package:foodie/ui/pages/order_qr/order_qr_page.dart';
 import 'package:foodie/ui/pages/pay/pay.dart';
 import 'package:foodie/ui/pages/log_in_with_google_and_foodie/log_in_with_google_and_foodie_page.dart';
 import 'package:foodie/ui/pages/recover_password/recuperarpass.dart';
-import 'package:foodie/ui/pages/register/sing_up.dart';
+import 'package:foodie/ui/pages/register/register_page.dart';
 import 'package:foodie/ui/pages/register_google/register_google_page.dart';
 import 'package:foodie/ui/pages/search/search_page.dart';
 import 'package:foodie/ui/pages/settings/settings_page.dart';
@@ -29,7 +29,7 @@ final routes = <String, WidgetBuilder>{
   // login
   'login': (BuildContext context) => LoginPage(),
   // register
-  'register': (BuildContext context) => const SignUp(),
+  'register': (BuildContext context) => const RegisterPage(),
   // cart
   'cartPage': (BuildContext context) => ShoppingCartPage(),
   // Search
