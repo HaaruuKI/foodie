@@ -3,6 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/domain/entities/search/function_search.dart';
+import 'package:foodie/ui/pages/search/widget/container_list_product.dart';
 import 'package:foodie/ui/widget/btn_back.dart';
 
 class SearchPage extends StatefulWidget {
@@ -15,6 +17,12 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   List<DocumentSnapshot> _results = [];
+
+  void resultsSetState(querySnapshot) {
+    setState(() {
+      _results = querySnapshot.docs;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,79 +54,37 @@ class _SearchPageState extends State<SearchPage> {
                 padding: EdgeInsets.symmetric(
                   horizontal: 10,
                 ),
-                child: Row(children: [
-                  Icon(
-                    CupertinoIcons.search,
-                    color: Color.fromARGB(255, 243, 164, 16),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        autofocus: true,
-                        controller: _searchController,
-                        decoration: InputDecoration(
-                          hintText: 'Buscar...',
-                          border: InputBorder.none,
-                        ),
-                        onChanged: (text) {
-                          _searchFirestore(text.toLowerCase());
-                        },
-                      ),
-                    ),
-                  ),
-                  // Icon(Icons.filter_list),
-                ]),
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _results.length,
-              itemBuilder: (context, index) {
-                return Column(
+                child: Row(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, 'details', arguments: {
-                          'name': _results[index]['name'],
-                          'price': _results[index]['price'],
-                          'img': _results[index]['img_url'],
-                          'des': _results[index]['description'],
-                        });
-                      },
-                      child: ListTile(
-                        title: Text(_results[index]['name']),
-                        subtitle: Text('\$ ${_results[index]['price']}'),
-                        trailing: Text(
-                          'mas detalles',
-                          style: TextStyle(fontSize: 15),
+                    Icon(
+                      CupertinoIcons.search,
+                      color: Color.fromARGB(255, 243, 164, 16),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextField(
+                          autofocus: true,
+                          controller: _searchController,
+                          decoration: InputDecoration(
+                            hintText: 'Buscar...',
+                            border: InputBorder.none,
+                          ),
+                          onChanged: (text) {
+                            FunctionSearch.searchFirestore(
+                                resultsSetState, text.toLowerCase());
+                          },
                         ),
                       ),
                     ),
                   ],
-                );
-              },
+                ),
+              ),
             ),
           ),
+          containerListProduct(results: _results),
         ],
       ),
     );
-  }
-
-  void _searchFirestore(String text) {
-    String startAt = text;
-    String endAt = '$text\uf8ff';
-
-    FirebaseFirestore.instance
-        .collection('products')
-        .where('name', isGreaterThanOrEqualTo: startAt)
-        .where('name', isLessThanOrEqualTo: endAt)
-        .get()
-        .then((querySnapshot) {
-      setState(() {
-        _results = querySnapshot.docs;
-      });
-    });
   }
 }

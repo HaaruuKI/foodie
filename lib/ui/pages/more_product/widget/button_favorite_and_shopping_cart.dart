@@ -17,7 +17,7 @@ Widget buttonFavoriteAndShoppingCart(
           if (LogIn.user != null) {
             FuncionFavorites.AddToFavorite(name, price, img);
           } else {
-            NavigateTo.Profile(context);
+            NavigateTo.profile(context);
           }
         },
         icon: const Icon(
@@ -32,7 +32,7 @@ Widget buttonFavoriteAndShoppingCart(
             FuntionShoppingCart.EnviarDatosRealtimeDatabase(name, price, img);
             FuntionShowSnackBar.showSentText(context, name);
           } else {
-            NavigateTo.Profile(context);
+            NavigateTo.profile(context);
           }
         },
         icon: const Icon(

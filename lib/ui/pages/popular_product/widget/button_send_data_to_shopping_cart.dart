@@ -26,7 +26,7 @@ class buttonSendDataToShoppingCart extends StatelessWidget {
               widget.name, widget.price, widget.img);
           print('usuario registrado');
         } else {
-          NavigateTo.Profile(context);
+          NavigateTo.profile(context);
           print('usuario no registrado');
         }
       },
