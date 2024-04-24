@@ -16,12 +16,12 @@ class PopularesItem extends StatefulWidget {
   final VoidCallback onTap;
 
   const PopularesItem({
-    super.key, // Add Key parameter
+    super.key,
     required this.name,
     required this.price,
     required this.img,
     required this.onTap,
-  }); // Use super constructor
+  });
 
   @override
   State<PopularesItem> createState() => _PopularesItemState();
@@ -38,7 +38,7 @@ class _PopularesItemState extends State<PopularesItem> {
   Widget build(BuildContext context) {
     final name = widget.name;
     final img = widget.img;
-    final sendDetails = widget.onTap;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
       child: GestureDetector(
@@ -64,12 +64,6 @@ class _PopularesItemState extends State<PopularesItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 imageWidget(img),
-                // CachedNetworkImage(
-                //   imageUrl: widget.img,
-                //   placeholder: (context, url) =>
-                //       const CircularProgressIndicator(),
-                //   errorWidget: (context, url, error) => const Icon(Icons.error),
-                // ),
                 const SizedBox(height: 12),
                 nameWidget(name),
                 const SizedBox(height: 4),

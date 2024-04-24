@@ -99,6 +99,9 @@ class _FavoritePageState extends State<FavoritePage> {
                 ],
               );
             }
+            return Center(
+              child: Text('No hay favoritos'),
+            );
           }
           return Center(
             child: CircularProgressIndicator(),
