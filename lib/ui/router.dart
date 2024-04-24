@@ -6,7 +6,7 @@ import 'package:foodie/ui/pages/login/login_page.dart';
 import 'package:foodie/ui/pages/menu/menu_page.dart';
 import 'package:foodie/ui/pages/order_qr/order_qr_page.dart';
 import 'package:foodie/ui/pages/pay/pay.dart';
-import 'package:foodie/ui/pages/profile/profile_tab.dart';
+import 'package:foodie/ui/pages/log_in_with_google_and_foodie/log_in_with_google_and_foodie_page.dart';
 import 'package:foodie/ui/pages/recover_password/recuperarpass.dart';
 import 'package:foodie/ui/pages/register/sing_up.dart';
 import 'package:foodie/ui/pages/register_google/register_google_page.dart';
@@ -37,7 +37,7 @@ final routes = <String, WidgetBuilder>{
   // details
   'details': (BuildContext context) => DetailsPage(),
   // profile
-  'profile': (BuildContext context) => const ProfileUser(),
+  'profile': (BuildContext context) => const LogInWithGoogleOrFoodie(),
   // history
   'history': (BuildContext context) => const HistoryOrder(),
   // recover password

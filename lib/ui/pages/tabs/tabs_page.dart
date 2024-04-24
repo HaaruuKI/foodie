@@ -1,10 +1,11 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/ui/pages/close_sesion_profile/close_seison_profile_page.dart';
 import 'package:foodie/ui/pages/explore_tab/explore_tab.dart';
 import 'package:foodie/ui/pages/favorites/favorite_page.dart';
 import 'package:foodie/ui/pages/order/order_tab.dart';
-import 'package:foodie/ui/pages/profile/profile_tab.dart';
+import 'package:foodie/ui/pages/log_in_with_google_and_foodie/log_in_with_google_and_foodie_page.dart';
 //Importando las 'Pages' tab.
 
 class TabsPage extends StatefulWidget {
@@ -20,16 +21,12 @@ class _TabsPageState extends State<TabsPage> {
     const ExploreTab(),
     const Order(),
     const FavoritePage(),
-    const ProfileUser(),
-    // Pay(),
+    const CloseSesionProfilePage(),
   ];
 
   final List<Widget> _widgetOptionsGuest = [
     const ExploreTab(),
-    // Order(),r
-    // Favorites(),
-    const ProfileUser(),
-    // const Pay(),
+    const LogInWithGoogleOrFoodie(),
   ];
 
   //declaracion variable tipo entero para jugar con los indices del arreglo.

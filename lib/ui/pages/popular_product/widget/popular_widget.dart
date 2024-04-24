@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodie/domain/entities/favorite/funtion_favorite.dart';
-import 'package:foodie/domain/entities/add_to_shopping_cart.dart';
 import 'package:foodie/domain/entities/log_in.dart';
-import 'package:foodie/domain/entities/navigator/navigate_to.dart';
-import 'package:foodie/domain/entities/snack_bar_send_data.dart';
-import 'package:foodie/ui/colors.dart';
+import 'package:foodie/ui/pages/popular_product/widget/button_add_favorite.dart';
+import 'package:foodie/ui/pages/popular_product/widget/button_send_data_to_shopping_cart.dart';
 import 'package:foodie/ui/widget/image_widget.dart';
 import 'package:foodie/ui/widget/name_widget.dart';
+import 'package:foodie/ui/widget/price_widget.dart';
 
 class PopularesItem extends StatefulWidget {
   final String name;
@@ -64,51 +61,14 @@ class _PopularesItemState extends State<PopularesItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 imageWidget(img),
-                const SizedBox(height: 12),
                 nameWidget(name),
-                const SizedBox(height: 4),
-                Text(
-                  "\$ ${widget.price}",
-                  style: const TextStyle(
-                    fontSize: 17,
-                    color: amarillo,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                priceWidget(widget.price),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.favorite_border,
-                          color: amarillo, size: 26),
-                      onPressed: () {
-                        if (LogIn.user != null) {
-                          FuncionFavorites.AddToFavorite(
-                              widget.name, widget.price, widget.img);
-                          print('usuario registrado');
-                        } else {
-                          NavigateTo.Profile(context);
-                          print('usuario no registrado');
-                        }
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(CupertinoIcons.cart,
-                          color: amarillo, size: 26),
-                      onPressed: () {
-                        if (LogIn.user != null) {
-                          FuntionShowSnackBar.showSentText(
-                              context, widget.name);
-                          FuntionShoppingCart.EnviarDatosRealtimeDatabase(
-                              widget.name, widget.price, widget.img);
-                          print('usuario registrado');
-                        } else {
-                          NavigateTo.Profile(context);
-                          print('usuario no registrado');
-                        }
-                      },
-                    ),
+                    buttonAddFavorite(widget: widget),
+                    buttonSendDataToShoppingCart(widget: widget),
                   ],
                 ),
               ],
