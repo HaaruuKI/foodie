@@ -30,7 +30,11 @@ class _MoneyFoodieState extends State<MoneyFoodie> {
             scale: 5,
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
+              await LogIn.auth.signOut();
+              await LogIn.googleSignIn.signOut();
+              Navigator.pushNamed(context, 'menu');
+
               setState(() {
                 credits = LogIn.moneyfoodie;
               });
