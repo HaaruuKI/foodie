@@ -3,8 +3,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/colors.dart';
+
 import 'package:foodie/ui/widget/btn_back.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+
+import 'widget/order_qr_page.dart';
+import 'widget/qr_widget.dart';
+import 'widget/text_date.dart';
+import 'widget/text_id.dart';
+import 'widget/text_price.dart';
+import 'widget/text_product_list.dart';
+import 'widget/text_productos.dart';
 
 class OrderQRPage extends StatefulWidget {
   @override
@@ -12,7 +20,7 @@ class OrderQRPage extends StatefulWidget {
 }
 
 class _OrderQRPageState extends State<OrderQRPage> {
-  String? key;
+  String? id;
   List products = [];
   int? totalPrice;
   int? timestamp;
@@ -20,8 +28,9 @@ class _OrderQRPageState extends State<OrderQRPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final args = ModalRoute.of(context)!.settings.arguments as Map;
-    key = args['key'];
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    id = args['key'];
     products = args['products'];
     totalPrice = args['totalPrice'];
     timestamp = args['timestamp'];
@@ -35,20 +44,8 @@ class _OrderQRPageState extends State<OrderQRPage> {
           child: Column(
             children: [
               btnBack(context),
-              Text(
-                'QR',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-              QrImageView(
-                data: key ?? '',
-                version: QrVersions.auto,
-                size: 320,
-                gapless: false,
-                embeddedImage: AssetImage('assets/my-Logo.png'),
-                embeddedImageStyle: QrEmbeddedImageStyle(
-                  size: Size(150, 150),
-                ),
-              ),
+              text_qr(),
+              qrWidget(id: id),
               SizedBox(height: 25),
               Container(
                 margin: EdgeInsetsDirectional.all(20.0),
@@ -68,44 +65,13 @@ class _OrderQRPageState extends State<OrderQRPage> {
                   child: Column(
                     children: [
                       SizedBox(height: 15),
-                      Text(
-                        key ?? '',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
+                      textId(id: id),
                       SizedBox(height: 15),
-                      Text(
-                        'Productos:',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Column(
-                        children: products
-                            .map<Widget>(
-                              (product) => Padding(
-                                padding: EdgeInsets.symmetric(vertical: 4),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      '${product['name']} - ${product['quantity']} C/unidad - ${product['price'].toStringAsFixed(2)}',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
+                      textProductos(),
+                      textProductList(products: products),
                       SizedBox(height: 15),
-                      Text(
-                        'Fecha: ${DateTime.fromMicrosecondsSinceEpoch(timestamp!).toString()}',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        'Total: \$${totalPrice!.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
+                      text_date(timestamp: timestamp),
+                      textPrice(totalPrice: totalPrice),
                       SizedBox(height: 15),
                       Icon(
                         CupertinoIcons.checkmark_alt_circle,

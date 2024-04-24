@@ -1,7 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:foodie/domain/entities/log_in.dart';
+import 'package:foodie/domain/entities/order/funtion_order.dart';
 import 'package:foodie/ui/colors.dart';
+
+import 'widget/text_date.dart';
+import 'widget/text_id.dart';
+import 'widget/text_price.dart';
+import 'widget/text_product_list.dart';
+import 'widget/text_state.dart';
+import 'widget/text_total_price.dart';
 
 class Order extends StatefulWidget {
   const Order({Key? key}) : super(key: key);
@@ -17,10 +24,7 @@ class _OrderState extends State<Order> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('orders')
-            .doc(LogIn.user!.uid)
-            .snapshots(),
+        stream: FuntionGetOrder.getDataOrders(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -40,12 +44,12 @@ class _OrderState extends State<Order> {
             );
           }
 
-          final data = snapshot.data!.data() as Map<String, dynamic>;
-          final order = data.values.toList();
+          final order =
+              (snapshot.data!.data() as Map<String, dynamic>).values.toList();
           final filteredOrder =
               order.where((item) => item['state'] != 'entregado').toList();
           for (int i = 0; i < filteredOrder.length; i++) {
-            var total = filteredOrder[i]['totalPrice'] as int;
+            int total = filteredOrder[i]['totalPrice'];
             totalOrderPrice += total;
           }
 
@@ -63,16 +67,19 @@ class _OrderState extends State<Order> {
                 child: ListView.builder(
                   itemCount: filteredOrder.length,
                   itemBuilder: (context, index) {
-                    final state = filteredOrder[index]['state'];
+                    final String state = filteredOrder[index]['state'];
                     final int totalPrice = filteredOrder[index]['totalPrice'];
-                    final products = filteredOrder[index]['products'];
-                    final key = filteredOrder[index]['key'];
-                    final timestamp = filteredOrder[index]['timestamp'];
+                    final List products = filteredOrder[index]['products'];
+                    final String id = filteredOrder[index]['key'];
+                    final int timestamp = filteredOrder[index]['timestamp'];
+
+                    final date = DateTime.fromMicrosecondsSinceEpoch(timestamp)
+                        .toString();
 
                     return GestureDetector(
                       onTap: () =>
                           Navigator.pushNamed(context, 'orderQR', arguments: {
-                        'key': key,
+                        'key': id,
                         'products': products,
                         'totalPrice': totalPrice,
                         'timestamp': timestamp,
@@ -83,58 +90,20 @@ class _OrderState extends State<Order> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Orden $key',
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Fecha: ${DateTime.fromMicrosecondsSinceEpoch(timestamp).toString()}',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                              const SizedBox(height: 8),
+                              textId(id: id),
+                              textDate(date: date),
                               const Text(
                                 'Productos:',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              Column(
-                                children: products
-                                    .map<Widget>(
-                                      (product) => Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 4),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              '${product['name']} - ${product['quantity']} C/unidad - ${product['price'].toStringAsFixed(2)}',
-                                              style:
-                                                  const TextStyle(fontSize: 16),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                              const SizedBox(height: 8),
+                              textProductList(products: products),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Total: \$${totalPrice.toStringAsFixed(2)}',
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    'Estado: $state',
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  textPrice(totalPrice: totalPrice),
+                                  textState(state: state),
                                 ],
                               ),
                               const Center(
@@ -177,24 +146,18 @@ class _OrderState extends State<Order> {
                           vertical: 10,
                         ),
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Total:',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Total:',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                '\$$totalOrderPrice', // Mostrar la suma de los totalPrice
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: amarillo,
-                                ),
-                              ),
-                            ]),
+                            ),
+                            textTotalPrice(totalOrderPrice: totalOrderPrice),
+                          ],
+                        ),
                       ),
                     ],
                   ),
