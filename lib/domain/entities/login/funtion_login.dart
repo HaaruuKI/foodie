@@ -9,9 +9,10 @@ class FunctionGetLogin {
       TextEditingController passwordController,
       bool cargando,
       BuildContext context,
-      Function funtionCargar) async {
+      Function funtionCargarTrue,
+      Function funtionCargarFalse) async {
     if (formKey.currentState!.validate()) {
-      funtionCargar();
+      funtionCargarTrue();
       // setState(() {
       // cargando = true;
       // });
@@ -41,7 +42,7 @@ class FunctionGetLogin {
             .showSnackBar(SnackBar(content: Text(e.message!)));
       } finally {
         // setState(() {
-        cargando = false;
+        funtionCargarFalse();
         // });
       }
     }

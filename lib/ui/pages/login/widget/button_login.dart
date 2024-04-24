@@ -8,12 +8,19 @@ Widget buttonLogin(
     bool cargando,
     BuildContext context,
     GlobalKey<FormState> formKey,
-    Function funtionCargar) {
+    Function funtionCargarTrue,
+    Function funtionCargarFalse) {
   return ElevatedButton(
     style: buttonPrimary,
     onPressed: () {
-      FunctionGetLogin.signInWithEmailAndPassword(emailController, formKey,
-          passwordController, cargando, context, funtionCargar);
+      FunctionGetLogin.signInWithEmailAndPassword(
+          emailController,
+          formKey,
+          passwordController,
+          cargando,
+          context,
+          funtionCargarTrue,
+          funtionCargarFalse);
     },
     child: const Text('Iniciar sesión'),
   );

@@ -24,9 +24,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool cargando = false;
-  void funtionCargar() {
+  void funtionCargarTrue() {
     setState(() {
       cargando = true;
+    });
+  }
+
+  void funtionCargarFalse() {
+    setState(() {
+      cargando = false;
     });
   }
 
@@ -46,9 +52,10 @@ class _LoginPageState extends State<LoginPage> {
                       emailController,
                       passwordController,
                       cargando,
-                      funtionCargar,
                       funtionPasswordVisible,
-                      passwordVisible),
+                      passwordVisible,
+                      funtionCargarTrue,
+                      funtionCargarFalse),
                 ],
               ),
             ),
