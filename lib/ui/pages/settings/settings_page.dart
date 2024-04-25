@@ -1,10 +1,12 @@
 // ignore_for_file: avoid_print
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:foodie/domain/entities/log_in.dart';
-import 'package:foodie/ui/button.dart';
+import 'package:foodie/ui/pages/settings/widget/button_update.dart';
+import 'package:foodie/ui/pages/settings/widget/textfield_email.dart';
+import 'package:foodie/ui/pages/settings/widget/textfield_last_name.dart';
+import 'package:foodie/ui/pages/settings/widget/textfield_name.dart';
+import 'package:foodie/ui/pages/settings/widget/textfield_num_phone.dart';
 import 'package:foodie/ui/widget/btn_back.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -29,51 +31,6 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     LogIn().GetCurrentUser;
-  }
-
-  Future<bool> checkEmailExists(String email) async {
-    QuerySnapshot querySnapshot = await LogIn.firestore
-        .collection('Users')
-        .where('email', isEqualTo: email)
-        .where('name', isEqualTo: name)
-        .where('numero', isEqualTo: numphone)
-        .get();
-
-    return querySnapshot.docs.isNotEmpty;
-  }
-
-  void updateData() {
-    String? user = LogIn.user?.uid;
-    if (nameController.text.isNotEmpty ||
-        lastnameController.text.isNotEmpty ||
-        numphoneController.text.isNotEmpty) {
-      checkEmailExists(email ?? '').then((value) {
-        if (value) {
-          LogIn.firestore.collection('Users').doc(user).update({
-            if (nameController.text.isNotEmpty) 'name': nameController.text,
-            if (lastnameController.text.isNotEmpty)
-              'lastname': lastnameController.text,
-            if (numphoneController.text.isNotEmpty)
-              'numero': numphoneController.text,
-          });
-          print('Datos actualizados');
-          print(email);
-        } else {
-          LogIn.firestore.collection('Users').doc(user).set({
-            if (nameController.text.isNotEmpty) 'name': nameController.text,
-            if (lastnameController.text.isNotEmpty)
-              'lastname': lastnameController.text,
-            if (numphoneController.text.isNotEmpty)
-              'numero': numphoneController.text,
-            'email': email,
-            'moneyfoodie': 0,
-          });
-          print('Subir datos');
-          print(email);
-        }
-      });
-    }
-    Navigator.pushNamed(context, 'menu');
   }
 
   @override
@@ -109,76 +66,33 @@ class _SettingsPageState extends State<SettingsPage> {
                       'Nombre',
                       style: TextStyle(fontSize: 18),
                     ),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      controller: nameController,
-                      decoration: InputDecoration(
-                        hintText: name,
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ),
+                    textfieldName(nameController: nameController, name: name),
                     const Text(
                       'Apellido',
                       style: TextStyle(fontSize: 18),
                     ),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      controller: lastnameController,
-                      decoration: InputDecoration(
-                        hintText: lastname,
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ),
+                    textfieldLastName(
+                        lastnameController: lastnameController,
+                        lastname: lastname),
                     const Text(
                       'Correo electronico',
                       style: TextStyle(fontSize: 18),
                     ),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      enabled: false,
-                      controller: TextEditingController(text: email),
-                      decoration: InputDecoration(
-                        hintText: email,
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ),
+                    textfieldEmail(email: email),
                     const Text(
                       'Numero de telefono',
                       style: TextStyle(fontSize: 18),
                     ),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      controller: numphoneController,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      decoration: InputDecoration(
-                        hintText: numphone,
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: buttonPrimary,
-                      onPressed: () {
-                        updateData();
-                      },
-                      child: const Text('Actualizar'),
-                    )
+                    textfieldNumPhone(
+                        numphoneController: numphoneController,
+                        numphone: numphone),
+                    buttonUpdate(
+                        nameController: nameController,
+                        lastnameController: lastnameController,
+                        numphoneController: numphoneController,
+                        email: email,
+                        name: name,
+                        numphone: numphone),
                   ],
                 ),
               ),

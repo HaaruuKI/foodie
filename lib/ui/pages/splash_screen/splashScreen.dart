@@ -6,7 +6,6 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Llama a la función desde splashScreenFuncion.dart
     return const WidgetSplashScreen();
   }
 }

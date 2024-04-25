@@ -16,10 +16,7 @@ class _WidgetSplashScreenState extends State<WidgetSplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Aquí puedes agregar cualquier lógica que necesites para tu splash screen, como cargar datos o mostrar una animación
-    // Por ejemplo, puedes usar un Future.delayed para simular una espera de 3 segundos antes de pasar a la siguiente pantalla
-    Future.delayed(const Duration(seconds: 4), () {
-      // Navegar a la siguiente pantalla después de 3 segundos
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const TabsPage()),
