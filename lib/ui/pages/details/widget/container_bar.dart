@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/domain/entities/name_shopping_cart.dart';
-import 'package:foodie/ui/pages/cart_store/widget/price_checkout.dart';
+import 'package:foodie/ui/pages/shopping_cart/widget/price_checkout.dart';
 import 'package:foodie/ui/pages/details/widget/buttom_add.dart';
 
 Widget ContainerBar(

@@ -7,7 +7,7 @@ import 'package:foodie/ui/pages/settings/widget/textfield_email.dart';
 import 'package:foodie/ui/pages/settings/widget/textfield_last_name.dart';
 import 'package:foodie/ui/pages/settings/widget/textfield_name.dart';
 import 'package:foodie/ui/pages/settings/widget/textfield_num_phone.dart';
-import 'package:foodie/ui/widget/btn_back.dart';
+import 'package:foodie/ui/widget/button_back.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

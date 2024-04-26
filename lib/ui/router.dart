@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodie/ui/pages/cart_store/shopping_cart_page.dart';
+import 'package:foodie/ui/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:foodie/ui/pages/details/details_page.dart';
 import 'package:foodie/ui/pages/history_order/history_order_page.dart';
 import 'package:foodie/ui/pages/login/login_page.dart';

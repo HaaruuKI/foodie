@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/search/function_search.dart';
 import 'package:foodie/ui/pages/search/widget/container_list_product.dart';
-import 'package:foodie/ui/widget/btn_back.dart';
+import 'package:foodie/ui/widget/button_back.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

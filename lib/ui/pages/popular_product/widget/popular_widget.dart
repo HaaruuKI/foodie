@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/domain/entities/log_in.dart';
-import 'package:foodie/ui/pages/popular_product/widget/button_add_favorite.dart';
-import 'package:foodie/ui/pages/popular_product/widget/button_send_data_to_shopping_cart.dart';
+import 'package:foodie/ui/widget/button_add_favorite.dart';
+import 'package:foodie/ui/widget/button_send_data_to_shopping_cart.dart';
 import 'package:foodie/ui/widget/image_widget.dart';
 import 'package:foodie/ui/widget/name_widget.dart';
 import 'package:foodie/ui/widget/price_widget.dart';

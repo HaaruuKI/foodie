@@ -59,7 +59,7 @@ class _MoreWidgetState extends State<MoreWidget> {
           children: [
             imageWidget(img),
             expandedContaierMoreProduct(name, price),
-            buttonFavoriteAndShoppingCart(name, price, img, context),
+            buttonFavoriteAndShoppingCart(widget: widget)
           ],
         ),
       ),

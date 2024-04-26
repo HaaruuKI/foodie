@@ -5,7 +5,7 @@ import 'package:foodie/domain/entities/recover_password/function_recover_passwor
 import 'package:foodie/ui/button.dart';
 import 'package:foodie/ui/colors.dart';
 import 'package:foodie/ui/pages/recover_password/widget/textfield_email.dart';
-import 'package:foodie/ui/widget/btn_back.dart';
+import 'package:foodie/ui/widget/button_back.dart';
 
 class RecoverPassword extends StatefulWidget {
   const RecoverPassword({super.key});

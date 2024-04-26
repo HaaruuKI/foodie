@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/pages/menu/widget/expanded_container.dart';
 import 'package:foodie/ui/pages/menu/widget/text_category.dart';
-import 'package:foodie/ui/widget/btn_back.dart';
-import 'package:foodie/ui/widget/btn_cart.dart';
+import 'package:foodie/ui/widget/button_back.dart';
+import 'package:foodie/ui/widget/button_navigate_shopping_cart.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -34,7 +34,7 @@ class _MenuPageState extends State<MenuPage> {
           expandedContainer(category),
         ],
       ),
-      floatingActionButton: const BtnCart(),
+      floatingActionButton: const ButtonNavigateShoppingCart(),
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:foodie/domain/entities/log_in.dart';
 import 'package:foodie/ui/pages/details/widget/arc_widget.dart';
 import 'package:foodie/ui/pages/details/widget/container_bar.dart';
 import 'package:foodie/ui/pages/details/widget/image_widget.dart';
-import 'package:foodie/ui/widget/btn_back.dart';
+import 'package:foodie/ui/widget/button_back.dart';
 
 class DetailsPage extends StatefulWidget {
   @override

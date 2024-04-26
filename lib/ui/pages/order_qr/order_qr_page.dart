@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/ui/colors.dart';
 
-import 'package:foodie/ui/widget/btn_back.dart';
+import 'package:foodie/ui/widget/button_back.dart';
 
 import 'widget/order_qr_page.dart';
 import 'widget/qr_widget.dart';
