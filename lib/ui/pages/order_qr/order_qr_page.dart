@@ -43,7 +43,7 @@ class _OrderQRPageState extends State<OrderQRPage> {
         child: Center(
           child: Column(
             children: [
-              btnBack(context),
+              buttonBack(),
               text_qr(),
               qrWidget(id: id),
               SizedBox(height: 25),

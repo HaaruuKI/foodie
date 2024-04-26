@@ -43,7 +43,7 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      btnBack(context),
+                      const buttonBack(),
                       const Center(
                         child: Text(
                             '¿Olvidaste tu contraseña  Google o Foodie?',

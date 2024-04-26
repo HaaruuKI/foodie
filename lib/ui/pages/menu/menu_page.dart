@@ -29,7 +29,7 @@ class _MenuPageState extends State<MenuPage> {
     return Scaffold(
       body: Column(
         children: [
-          btnBack(context),
+          const buttonBack(),
           textCategory(category),
           expandedContainer(category),
         ],

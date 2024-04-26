@@ -50,7 +50,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
               }
               return Column(
                 children: [
-                  btnBack(context),
+                  buttonBack(),
                   expandedProducts(items, totalQuantity, context),
                   checkoutContainer(items, totalQuantity, totalPrice, context),
                 ],

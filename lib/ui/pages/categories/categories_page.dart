@@ -6,18 +6,18 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
         child: Column(
           children: [
-            const Text(
+            Text(
               'Categorias',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 26),
-            CategoryListWidget(context),
+            SizedBox(height: 26),
+            categoryList(),
           ],
         ),
       ),

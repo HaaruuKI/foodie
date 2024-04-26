@@ -41,14 +41,14 @@ class _DetailsPageState extends State<DetailsPage> {
         padding: EdgeInsets.only(top: 5),
         child: ListView(
           children: [
-            btnBack(context),
-            ImageWidget(img),
-            ArcWidget(price, name, des),
+            buttonBack(),
+            imageWidget(img: img),
+            arcWidget(price: price, name: name, des: des),
           ],
         ),
       ),
       bottomNavigationBar: LogIn.user != null
-          ? ContainerBar(name!, price!, img!, context)
+          ? containerBar(name: name, price: price, img: img)
           : null,
     );
   }

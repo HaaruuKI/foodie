@@ -29,7 +29,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       body: Column(
         children: [
-          btnBack(context),
+          buttonBack(),
           Padding(
             padding: EdgeInsets.symmetric(
               vertical: 30,
